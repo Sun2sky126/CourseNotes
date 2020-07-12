@@ -1,0 +1,827 @@
+\documentclass[UTF8,openany]{book}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ctex}
+\usepackage{esint}
+\begin{document}
+	\chapter{静电场}
+	\section{电荷\quad Coulomb定律\quad 电场\quad 叠加原理}
+	\subsection{电荷}
+	自然界只有正、负两种电荷，电荷物理量用符号$Q$或者$q$表示，单位是库仑（C）。Milikan实验表明，电荷量是一个最小电荷量的整数倍，这个最小电荷量称为元电荷，取值为
+	$$e=1.6\times 10^{-19}\mathrm{C}$$\par
+	类比密度的概念，可以定义电荷密度（体密度、面密度、线密度）
+	$$\rho=\frac{\mathrm{d}q}{\mathrm{d}V}$$
+	$$\sigma=\frac{\mathrm{d}q}{\mathrm{d}S}$$
+	$$\lambda=\frac{\mathrm{d}q}{\mathrm{d}l}$$
+	\subsection{Coulomb定律}
+	Coulomb定律用于描述\textbf{真空中}两个\textbf{静止的}\textbf{点电荷}之间的相互作用力。设两个点电荷以及其带电量为$q_1$，$q_2$，后者相对于前者的位矢为$\textbf{\textit{r}}_{21}$，$q_1$对$q_2$的作用力为$\textbf{\textit{F}}_{21}$，则
+	$$\textbf{\textit{F}}_{21}=k\frac{q_1q_2}{r_{21}^{2}}\hat{\textbf{\textit{r}}}_{21}=
+	\frac{1}{4\pi\varepsilon_{0}}\frac{q_1q_2}{r_{21}^{2}}\hat{\textbf{\textit{r}}}_{21}$$\par
+	其中$k=9\times 10^9\mathrm{N\cdot m^2/C^2}$，$\varepsilon_{0}$被称为\textbf{真空介电常数}，取值为$\varepsilon_0=8.85\times 10^{-12}\mathrm{C^2/N\cdot m^2}$。
+	\subsection{电场}
+	电荷之间的作用力被理解为：一个电荷激发出\textbf{电场}，处在电场中的电荷会受到相应的电场力，电场也可以对其做功。但是电荷不会受到自身激发的电场的作用。电场具有动量和能量，并且可以脱离电荷、电流而存在。若点电荷$q$在某处受到电场力为$\textbf{\textit{F}}$，则该处电场的定义为
+	$$\textbf{\textit{E}}=\frac{\textbf{\textit{F}}}{q}$$\par
+	由此可得点电荷在$\textbf{\textit{r}}$处激发的电场
+	$$\textbf{\textit{E}}(\textbf{\textit{r}})=\frac{kq}{r^2}\hat{\textbf{\textit{r}}}=\frac{q}{4\pi\varepsilon_0r^2}\hat{\textbf{\textit{r}}}$$
+	\subsection{叠加定理}
+	根据两个点电荷之间的作用力规律，可以推出多个点电荷、连续带电体的静电力规律：只需将各个电荷产生的作用力或者电场按照矢量运算规则相加即可，这就是叠加定理。\par
+	离散电荷的电场力与电场：
+	$$\textbf{\textit{F}}=\sum_{i}\frac{1}{4\pi\varepsilon_0}\frac{q_0q_i}{r_i^2}\hat{\textbf{\textit{r}}}_i$$
+	$$\textbf{\textit{E}}=\sum_{i}\frac{1}{4\pi\varepsilon_0}\frac{q_i}{r_i^2}\hat{\textbf{\textit{r}}}_i$$\par
+	连续带电体的电场力与电场（以体密度为例）：
+	$$\textbf{\textit{E}}=\frac{1}{4\pi\varepsilon_0}
+	\iiint\limits_{V}\frac{\mathrm{d}q}{r^2}\hat{\textbf{\textit{r}}}=
+	\frac{1}{4\pi\varepsilon_0}\iiint\limits_{V}\frac{\rho\mathrm{d}V}{r^2}\hat{\textbf{\textit{r}}}$$
+	\section{电通量\quad Gauss定理}
+	\subsection{电通量}
+	电场线可以描述电场的大小与方向，电场线越稠密的地方，电场强度越大。静电场的电场线有头有尾，不相交，不闭合。可以用通过一曲面的电场线的“条数”来描述电场强度，这就是\textbf{电通量}。对于一面积为$S$的平面，电场线方向与之正交，强度为$\textbf{\textit{E}}$，则电通量
+	$$\Phi=ES$$\par
+	对于一般情况，对于曲面$\Sigma$，取面积微元$\mathrm{d}S$，其法向量约定为$\hat{\textbf{\textit{n}}}$，则可以定义面积矢量
+	$$\mathrm{d}\textbf{\textit{S}}=\mathrm{d}S\hat{\textbf{\textit{n}}}$$
+	进而就可以定义电通量微分
+	$$\mathrm{d}\Phi=\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{S}}$$\par
+	则通过曲面$\Sigma$的电通量为
+	$$\Phi=\iint\limits_{\Sigma}\mathrm{d}\Phi=\iint\limits_{\Sigma}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	\subsection{Gauss定理}
+	对于闭合曲面$\Omega$，相应也有电通量的定义
+	$$\Phi=\varoiint\limits_{\Omega}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	其中面元矢量的方向定义为从内到外。对此有Gauss定理：
+	$$\varoiint\limits_{\Omega}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{S}}=
+	\frac{1}{\varepsilon_0}\sum_{i}q_{i,in}=
+	\frac{1}{\varepsilon_0}\iiint\limits_{\Omega}\rho_{in}\mathrm{d}V$$
+	\par 注意，这里的电荷以及电荷密度特指曲面包围内部的电荷，外部电荷对于闭合曲面的电通量没有影响。
+	\section{典型带电系统的电场分布}
+	在前面两节的基础上，可以利用Coulomb定律和叠加定理求得带电体的电场分布。对于带电分布有明显对称性的，可以考虑采用Gauss定理。
+	\subsection{电偶极子}
+	电量大小相同、电性相反的两个点电荷构成一对电偶极子，定义电偶极矩$\textbf{\textit{p}}=q\textbf{\textit{l}}$，其中$\textbf{\textit{l}}$的方向是从正电荷指向负电荷。
+	\par 在电偶极子的中垂线上，距离中点位矢为$\textbf{\textit{r}}$时，若满足$r>>l$，则电场强度
+	$$\textbf{\textit{E}}=-\frac{\textbf{\textit{p}}}{4\pi\varepsilon_0r^3}$$
+	\par 在电偶极子连线的延长线上，距离终点位矢为$\textbf{\textit{r}}$时，若满足$r>>l$，则电场强度
+	$$\textbf{\textit{E}}=\frac{\textbf{\textit{p}}}{2\pi\varepsilon_0r^3}$$
+	\par 在原子物理中，常用的电偶极矩单位是Debay，简记为D，与SI单位C$\cdot$m的换算关系是
+	$$1\mathrm{D}=3.33564\times10^{-30}\mathrm{C\cdot m}$$
+	\subsection{带电细棒}
+	有一根长为$L$的带电细棒，电荷密度$\lambda$，带电量为$q$。一位置与此细棒的垂直距离为$x$，沿着细棒建立数轴$y$，此点与两端连线的倾斜角记为$\theta_1$，$\theta_2$。则垂直于棒的电场分布为
+	$$E_x=-\frac{\lambda}{4\pi\varepsilon_0x}(\cos\theta_2-\cos\theta_1)$$
+	$$E_y=\frac{\lambda}{4\pi\varepsilon_0x}(\sin\theta_2-\sin\theta_1)$$
+	\par 特别地，当垂足位于棒的中点时，我们有
+	$$E_x=\frac{q}{4\pi\varepsilon_0x^2\sqrt{1+\frac{L^2}{4x^2}}}$$
+	$$E_y=0$$
+	\par 若$x<<L$，则可以视为\textbf{无限长细棒}，此时电场强度
+	$$E_x=\frac{\lambda}{2\pi\varepsilon_0x}$$
+	\par 若$x>>L$，则可以视为点电荷，电场强度
+	$$E_x=\frac{q}{4\pi\varepsilon_0x^2}$$
+	\subsection{带电圆环}
+	有一带电圆环，半径为$R$，带电量为$q$，则其轴线上距离圆环中心$x$处的场强为
+	$$E=\frac{qx}{4\pi\varepsilon_0(R^2+x^2)^{\frac{3}{2}}}$$
+	\par 当$x=0$时，场强$E=0$；当$x>>R$时，圆环可以视作点电荷。
+	\subsection{带电圆盘}
+	有一带电圆盘，半径为$R$，面电荷密度为$\sigma$，则其轴线上距离圆盘中心$x$处的场强为
+	$$E=\frac{\sigma}{2\varepsilon_0}\left( 1-\frac{x}{\sqrt{R^2+x^2}}\right)$$
+	\par 当$x<<R$时，圆盘可以视作\textbf{无限大带电平面}，此时场强
+	$$E=\frac{\sigma}{2\varepsilon_0}$$
+	\par 当$x>>R$时，圆盘可以视作点电荷。
+	\subsection{带电球壳}
+	有一内径为$R_1$，外径为$R_2$，带电量为$q$，电荷密度为$\rho$的球壳，其距离球心距离为$r$处的场强为：
+	\par 当$0<r<R_1$时：
+	$$E(r)=0$$
+	\par 当$R_1<r<R_2$时：
+	$$E(r)=\frac{r^3-R_1^3}{3\varepsilon_0r^2}\rho$$
+	\par 当$r>R_2$时：
+	$$E(r)=\frac{q}{4\pi\varepsilon_0r^2}$$
+	\par 当$R_1\rightarrow R_2$时，就是带电薄球壳的情形。当$R_1=0$时，就是带电球体的情形。
+	\section{环路定理\quad 电势}
+	\subsection{环路定理}
+	对于真空中的点电荷$q$，以其为原点建系，对于一路径$L$，起点为$\textbf{\textit{r}}_1$，终点为$\textbf{\textit{r}}_2$。考虑路径积分
+	$$\int_{\textbf{\textit{r}}_1}^{\textbf{\textit{r}}_2}E\cdot\mathrm{d}l=
+	\frac{q}{4\pi\varepsilon_0}\int_{\textbf{\textit{r}}_1}^{\textbf{\textit{r}}_2}\frac{1}{r^2}\mathrm{d}r=
+	\frac{q}{4\pi\varepsilon_0}\left(\frac{1}{r_1}-\frac{1}{r_2}\right)$$
+	\par 也就是结果只与起点和终点有关。根据叠加定理，我们得到静电场环路定理
+	$$\oint \textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=0$$
+	\par 即静电场的路径积分只与起点和终点的位置有关，静电力是一种保守力。
+	\subsection{电势能与电势}
+	与保守力相对应，电场做功与电势能相联系。
+	\par 根据势能的特点，电场力做正功，电势能下降；电场力做负功，电势能下降。电场力从一处到另一处做的功，等于前者到后者的电势能差。
+	$$A_{1\rightarrow 2}=\int_{(1)}^{(2)}q\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=-(E_2-E_1)=E_1-E_2=E_{12}$$
+	\par 电势能差除以电量就是电势差。
+	$$E_{12}=q\phi_{12}=q(\phi_1-\phi_2)$$
+	$$\phi_1-\phi_2=\int_{(1)}^{(2)}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}$$
+	场力从某处到势能零点处做的功就是这一点的势能。也就是
+	$$A_{1\rightarrow 0}=\int_{(1)}^{(0)}q\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=0=E_1-E_0=E_{1}$$
+	$$\int_{(1)}^{(0)}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=0=\phi_1-\phi_0=\phi_{1}$$
+	\par 电势是标量，可以根据标量运算法则进行叠加。
+	\subsection{电势与电场强度的相互转换}
+	从电场到电势的转换为
+	$$\int_{(1)}^{(2)}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=\phi_1-\phi_2=-\Delta\phi$$
+	\par 从电势到电场的转换为
+	$$\textbf{\textit{E}}=-\frac{\partial\phi}{\partial\textbf{\textit{l}}}=-\nabla\phi$$
+	\par 电场的方向就是电势下降最快的方向。
+	\par 电场线用来描述电场，等势面则描述电势，二者是正交的。等势面密的地方，其电场强度越大；沿着电场线的方向，电势逐渐下降。
+	\section{典型带电体的电势与电势能}
+	\subsection{点电荷}
+	点电荷的电势分布为
+	$$\phi=\frac{q}{4\pi\varepsilon_0r}$$
+	\subsection{电偶极子}
+	电偶极矩为$\textbf{\textit{p}}$的电偶极子在匀强电场$\textbf{\textit{E}}$中的能量为
+	$$W=-\textbf{\textit{p}}\cdot\textbf{\textit{E}}$$
+	\par 当$l$与$E$同向时，电势能最小，电偶极子最稳定。
+	\subsection{无限长带电细棒}
+	对于电荷密度为$\lambda$的无限长带电细棒而言，选取距离细棒距离为$r_0$的地方为势能零点，则在距离为$r$处，电势
+	$$\phi=\frac{\lambda}{2\pi\varepsilon_0}\ln\frac{r_0}{r}$$
+	\subsection{带电球壳}
+	\par 对于带电量为$q$，半径为$R$的球壳，其电势分布为
+	$$\phi=\begin{cases}
+	\frac{q}{4\pi\varepsilon_0R} \quad & \quad 0\leqslant r<R \\
+	\frac{q}{4\pi\varepsilon_0r} \quad & \quad r>R\\
+	\end{cases}$$
+	\subsection{带电圆环}
+	\par 电荷量为$q$，半径为$R$的圆环，其轴线$x$处的电势为
+	$$\phi=\frac{q}{4\pi\varepsilon_0\sqrt{R^2+x^2}}$$
+	\section{系统电能\quad 电场能量}
+	\subsection{带电系统的电能}
+	\par 带电体的电能可以类比核能的概念：一些同号电荷从无穷远处聚集在一处，形成带电体，这个过程需要克服电场力做功，电势能增加。因为无穷远处电势能视作0，因此这增加的电势能就可以视作带电体的电能，也叫作自能。对于两个点电荷组成的系统，其自能为
+	$$W=\frac{1}{2}(q_1\phi_1+q_2\phi_2)$$
+	\par 推广到一般带电体，则有
+	$$W=\frac{1}{2}\sum_{i}q_i\phi_i=\frac{1}{2}\int\phi\mathrm{d}q$$
+	\subsection{电场能量}
+	\par 电能等于电势与电量之积，看来是电荷携带能量。但是电场可以脱离电荷而存在，这意味着电场自身也含有能量。电场能量密度定义为
+	$$w=\frac{1}{2}\varepsilon_0E^2$$
+	\par 因此在电场存在的空间内，电场能量为
+	$$W=\frac{1}{2}\int\varepsilon_0E^2\mathrm{d}V$$
+	
+	\chapter{静电场中的导体}
+	\section{静电平衡及其唯一性}
+	\subsection{静电平衡的建立}
+	\par 将导体放在电场$\textbf{\textit{E}}_{out}$中，在这个电场的作用下，导体中的带电粒子会运动而改变分布，这些粒子也会构成一个电场$\textbf{\textit{E}}_{in}$，在导体内部，两个电场是相互抵消的。最后当导体内没有带电粒子的运动，即导体内部没有电场，或者导体是一个等势体，这时导体就达到了\textbf{静电平衡}。静电平衡的建立是一个迅速的过程。接着有
+	$$\textbf{\textit{E}}'=\textbf{\textit{E}}_{out}+\textbf{\textit{E}}_{in}$$
+	\par 在导体外部，我们有$\textbf{\textit{E}}'\neq\textbf{\textit{E}}_{out}$，即外部电场发生了改变；在导体所在区域有$\textbf{\textit{E}}'=0$，即内部无电场。
+	\subsection{唯一性定理及其应用}
+	\par 在给定的以导体为边界的区域中，若区域内电荷分布确定，且其边界按下列条件之一给定时，则域内的静电场的解必唯一：（1）给定每个导体的电量；（2）给定每个导体的电势；（3）给定一部分导体的电量和另一部分导体的电势。
+	\par 唯一性定理可以用于设计电场，也可以用于分析静电平衡，例如电像法。比如，对于无限大导体平面，可以考虑镜面对称电荷；对于导体球，可以考虑球面对称电荷。
+	\section{平衡导体的电场、电势、电荷分布}
+	\subsection{电场和电势分布}
+	\par 对于形成的$\textbf{\textit{E}}'$，在导体内部，电场为0；在导体表面，电场线和导体表面垂直。
+	\par 而电势分布，整个导体处处电势相等，是一个等势体，导体表面则是等势面。这也说明不存在从导体的一处指向另一处的电场线。
+	\subsection{电荷分布}
+	\par 静电平衡的导体，其电荷分布满足下面几条规律：
+	\par （1）导体内部无净电荷，所有电荷均分布在导体的表面。因为导体内部没有电场，因此有
+	$$\varoiint_{\Omega}\textbf{\textit{E}}'\cdot\mathrm{d}\textbf{\textit{S}}=\frac{1}{\varepsilon_0}q_{in}$$
+	\par 而$\textbf{\textit{E}}'=0$，因此可以得到$q_{in}=0$。
+	\par 对于含有空腔的导体壳而言，作封闭曲面包围空腔，设空腔内部面电荷密度为$\sigma_{in}$，则有
+	$$\iint_{\Sigma}\sigma\mathrm{d}S=0$$
+	\par 如果面电荷密度不恒为0，那么将存在从一处指向另一处的电场线，导体不是等势体，与静电平衡条件矛盾。因此我们有
+	$$\sigma_{in}\equiv0$$
+	\par （2）导体表面的面电荷密度与电场强度成正比。在表面处作一个药片形状的封闭曲面，则有
+	$$\varoiint_{\Omega}\textbf{\textit{E}}'\cdot\mathrm{d}\textbf{\textit{S}}=E'\Delta S$$
+	$$\frac{1}{\varepsilon_0}q_{in}=\frac{\sigma\Delta S}{\varepsilon_0}$$
+	\par 所以
+	$$E'=\frac{\sigma}{\varepsilon_{0}}$$
+	\par （3）导体表面处曲率越大（越尖锐）的地方，面电荷密度越大。其一个重要的应用就是尖端放电。
+	\section{静电平衡的应用}
+	\subsection{静电场的分析}
+	\par 有导体存在时，静电场的分析和计算主要依据下面的规律：
+	\par （1）静电平衡条件，对电场有$E'_{in}=0$，对电势有$\phi\equiv C$，对电荷有：导体内部曲面包络内总电荷为0，导体表面电荷与电场强度成正比。
+	\par （2）电荷守恒定律，如果一个导体原先有电荷$q_0$，在静电场中，导体内部的电荷分布发生改变，但是仍有
+	$$\sum_{i}q_i=q_0$$
+	\par （3）Gauss定理与环路定理。
+	\subsection{静电屏蔽}
+	\par 静电屏蔽有下面两种。
+	\par 第一种，将封闭导体壳置于电场中，则壳内空腔无电场存在，外部电场不影响内部，从而达到静电屏蔽的效果。
+	\par 第二种，将带电体置于封闭导体壳中，这时导体壳内表面会产生和带电体电量相同的电荷，同时会有一部分电荷分布在导体壳外表面。如果将外表面接地，则空间外部不会有电场存在，内部电场不影响外部，从而达到静电屏蔽的效果。
+	
+	\chapter{静电场中的介质}
+	\section{介质的极化}
+	\subsection{介质的极化过程与描述}
+	\par 将介质放在电场中，构成介质的分子会发生变化。对于非极性分子，正负电荷中心会被电场拉开一段距离，形成电偶极子，这个过程称为\textbf{位移极化}；对于极性分子，其位移极化比较微弱，受到力矩的作用，$\textbf{\textit{M}}=\textbf{\textit{p}}\times\textbf{\textit{E}}$，主要表现为固有电偶极矩转向电场的方向，称为\textbf{转向极化}。这两种作用被统称为介质的极化。
+	\par 我们用\textbf{电极化强度}来描述介质的极化程度。取定体积$\Delta V$，对其大小的要求是：看上去“足够小”，但相对于介质分子又“足够大”，以至于可以容纳足够多的介质分子，其中有若干个极化形成的电偶极矩，则定义电极化强度为
+	$$\textbf{\textit{P}}=\frac{\sum_{i}\textbf{\textit{p}}_i}{\Delta V}$$
+	\par 一般情况，若分子密度为$n$，电偶极子为$(q,l)$，则
+	$$\textbf{\textit{P}}=nq\textbf{\textit{l}}$$
+	\par 当电场不是很强，介质是各向同性时，电极化强度与电场强度成正比，记为
+	$$\textbf{\textit{P}}=\varepsilon_0(\varepsilon_{r}-1)\textbf{\textit{E}}$$
+	\par 我们记$\chi=\varepsilon_{r}-1$，其中$\chi$称为\textbf{电极化率}，则上面的式子还可以记作
+	$$\textbf{\textit{P}}=\varepsilon_{0}\chi\textbf{\textit{E}}$$
+	\par 其中，$\varepsilon_{r}$是介质的属性，称为介质的\textbf{相对介电常数}，实际上是介质的介电常数与真空介电常数的比值
+	$$\varepsilon_{r}=\frac{\varepsilon}{\varepsilon_{0}}$$
+	\subsection{介质极化对电荷与电场的影响}
+	\par \textbf{对电荷的影响}\quad 介质极化会产生\textbf{极化电荷}。在介质中作一个封闭曲面，考虑面内的极化电荷。完全位于面内部和外部的电偶极子不起作用，只有恰好穿过曲面的电偶极子才会对电荷有贡献。在这个曲面的一个面元$\mathrm{d}S$处，作一个厚度为$l$的盒子，则其体积
+	$$\Delta V=l\mathrm{d}S\cos\theta$$
+	\par 若其中含有的分子数目为$n$，则电荷量为$qnl\mathrm{d}S\cos\theta$，那么
+	$$|\mathrm{d}q'|=|\textbf{\textit{P}}\cdot\mathrm{d}\textbf{\textit{S}}|$$
+	\par 如果正电荷留在外面，相当于给面内贡献了负电荷；如果负电荷留在了外面，相当于给面内贡献了正电荷，那么
+	$$\mathrm{d}q'=-\textbf{\textit{P}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	\par 积分可得
+	$$q'=-\varoiint\textbf{\textit{P}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	\par 可以求得极化电荷密度
+	$$\rho'=-\frac{1}{\Delta V}\varoiint_{\partial V}\textbf{\textit{P}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	\par 下面分别将这个结论应用于介质表面和介质内部。在各向同性的介质内部，极化电荷密度为0。在介质表面，有
+	$$\sigma'=\frac{\mathrm{d}q'}{\mathrm{d}S}=\frac{\textbf{\textit{P}}\cdot\mathrm{d}\textbf{\textit{S}}}{\mathrm{d}S}=\textbf{\textit{P}}\cdot\hat{\textbf{\textit{n}}}$$
+	\par 如果是两种介质的界面，设为介质1、2，对介质2而言，曲面法向量指向介质1，有
+	$$\sigma'=P_{2n}-P_{1n}$$
+	\par 其中，真空和导体的电极化强度为0。
+	\par \textbf{对电场的影响}\quad 将介质放在外电场$\textbf{\textit{E}}_0$中，就会产生极化电荷，极化电荷激发出电场$\textbf{\textit{E}}'$，与原来的电场合在一起，会削弱电场强度（与导体不同，导体会使得电场直接为0），并且有
+	$$\textbf{\textit{E}}=\textbf{\textit{E}}_0+\textbf{\textit{E}}'=\frac{\textbf{\textit{E}}_0}{\varepsilon_{r}}$$
+	\section{电位移矢量}
+	\par 在介质存在的情况下，原来的电场引起介质的极化，介质的极化会影响原来的电场，原来电场的改变又会改变介质的极化……为了求解这类问题，我们引入\textbf{电位移矢量}。
+	\par 考虑有介质的高斯定律，封闭曲面中包含介质，极化电荷记为$q'$，最终的总电场记为$\textbf{\textit{E}}$，此时有
+	$$\varoiint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{S}}=\frac{1}{\varepsilon_{0}}\left(\sum_{i}q_i+\sum_{j}q'_j\right)$$
+	$$\sum_{j}q'_j=-\varoiint\textbf{\textit{P}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	\par 整理可得
+	$$\varoiint(\varepsilon_{0}\textbf{\textit{E}}+\textbf{\textit{P}})\cdot\mathrm{d}\textbf{\textit{S}}=\sum_{i}q_i$$
+	\par 因此，我们定义电位移矢量
+	$$\textbf{\textit{D}}=\varepsilon_{0}\textbf{\textit{E}}+\textbf{\textit{P}}$$
+	并得到了它的Gauss定理
+	$$\varoiint\textbf{\textit{D}}\cdot\mathrm{d}\textbf{\textit{S}}=\sum_{i}q_i$$
+	\par 进一步我们可以导出
+	$$\textbf{\textit{D}}=\varepsilon_{0}\textbf{\textit{E}}+\textbf{\textit{P}}=\varepsilon_{0}\textbf{\textit{E}}+\varepsilon_{0}(\varepsilon_{r}-1)\textbf{\textit{E}}=\varepsilon_{0}\varepsilon_{r}\textbf{\textit{E}}=\varepsilon\textbf{\textit{E}}$$
+	\par 这样，我们就有了求解电场的方法：
+	\par （1）依据$\textbf{\textit{D}}$的高斯定律，根据电场中的电荷（无需考虑极化电荷）求出电位移矢量；
+	\par （2）依据$\textbf{\textit{D}}=\varepsilon\textbf{\textit{E}}$，求出电场强度。
+	\par （3）依据$\textbf{\textit{P}}=\varepsilon_{0}\chi\textbf{\textit{E}}$求出电极化强度。
+	\par （4）依据$\sigma'=\textbf{\textit{P}}\cdot\hat{\textbf{\textit{n}}}$，求出面电荷分布。
+	\section{边值关系}
+	\par 当电场线或者电位移矢量线从一个介质到达另一种介质时，会像光一样发生折射。下面则是具体的边值关系。
+	\subsection{法向关系}
+	\par 假设电位移矢量线从介质1进入介质2，两种介质的介电常数分别为$\varepsilon_{1}$，$\varepsilon_{2}$，作一个面积为$\Delta S$的小扁盒，则有
+	$$\varoiint\textbf{\textit{D}}\cdot\mathrm{d}\textbf{\textit{S}}=(D_{2n}-D_{1n})\Delta S=\sigma_{0}\Delta S$$
+	所以$D_{2n}-D_{1n}=\sigma_{0}$，当$\sigma_0=0$的时候，我们得到
+	$$D_{2n}=D_{1n}$$
+	$$\varepsilon_{2}E_{2n}=\varepsilon_{1}E_{1n}$$
+	$$\frac{E_{2n}}{E_{1n}}=\frac{\varepsilon_{1}}{\varepsilon_{2}}$$
+	\par 也就是说，从一个介质到达另一个介质时，\textbf{电位移矢量的法向分量不变，电场强度的法向分量与介质的介电常数成反比。}
+	\subsection{切向关系}
+	\par 在边界处作一个长度为$\Delta l$的小方框，则有
+	$$\oint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=(E_{2t}-E_{1t})\Delta l=0$$
+	\par 也就是说
+	$$E_{2t}=E_{1t}$$
+	$$\frac{D_{2t}}{\varepsilon_{2}}=\frac{D_{1t}}{\varepsilon_{1}}$$
+	$$\frac{D_{2t}}{D_{1t}}=\frac{\varepsilon_{2}}{\varepsilon_{1}}$$
+	\par 也就是说，从一个介质到达另一个介质时，\textbf{电场强度的切向分量不变，电位移矢量的切向分量与介质的介电常数成正比。}
+	\subsection{折射规律}
+	\par 经过上面两个小节的分析，我们就可以得到电场强度和电位移矢量的折射规律。
+	\par 对于电场强度，假设其入射角为$\epsilon_{1}$，出射角为$\epsilon_{2}$，那么
+	$$\tan\epsilon_{1}=\frac{E_{1t}}{E_{1n}}$$
+	$$\tan\epsilon_{2}=\frac{E_{2t}}{E_{2n}}$$
+	$$\frac{\tan\epsilon_{1}}{\tan\epsilon_{2}}=\frac{E_{1t}}{E_{2t}}\frac{E_{2n}}{E_{1n}}=\frac{\varepsilon_{1}}{\varepsilon_{2}}$$
+	%\par 同时，对于强度大小
+	%$$E_{1}=\sqrt{E_{1t}^2+E_{1n}^2}=E_{1n}\sqrt{1+\tan^2\epsilon_{1}}$$
+	%$$E_{2}=\sqrt{E_{2t}^2+E_{2n}^2}=E_{2n}\sqrt{1+\tan^2\epsilon_{2}}$$
+	%$$\frac{E_1}{E_2}=\frac{E_{1n}\sqrt{1+\tan^2\epsilon_{1}}}{E_{2n}\sqrt{1+\tan^2\epsilon_{2}}}=\frac{\varepsilon_{2}}{\varepsilon_{1}}\sqrt{\frac{1+\tan^2\epsilon_{1}}{1+\tan^2\epsilon_{2}}}$$
+	\par 对于电位移矢量，假设其入射角为$\delta_{1}$，出射角为$\delta_{2}$，那么
+	$$\tan\delta_{1}=\frac{D_{1t}}{D_{1n}}$$
+	$$\tan\delta_{2}=\frac{D_{2t}}{D_{2n}}$$
+	$$\frac{\tan\delta_{1}}{\tan\delta_{2}}=\frac{D_{1t}}{D_{2t}}\frac{D_{2n}}{D_{1n}}=\frac{\varepsilon_{1}}{\varepsilon_{2}}$$
+	\par 因此我们可以看出，无论是电场强度还是电位移矢量，其入射角和出射角都满足
+	$$\frac{\tan\theta_1}{\tan\theta_2}=\frac{\varepsilon_{1}}{\varepsilon_{2}}$$
+	\par 而具体的数值则没有明确的规律，可以自行推导。
+	\section{电容}
+	\subsection{电容器的构成}
+	\par 在两个电极之间夹上电介质，就形成了电容器。电容器形式上为开路，两段有电压，可以储存电荷。并定义其电容值为
+	$$C=\frac{Q}{U}$$
+	\par 可以先假设存储的电荷为$Q$，进一步可以推算出电位移矢量$\textbf{\textit{D}}$和电场强度$\textbf{\textit{E}}$，从而计算得电压$U$，这样就可以算出电容$C$。下面是一些电容器的电容值：
+	\par 平行极板电容：设极板面积为$S$，板间距为$d$，介质的介电常数为$\varepsilon$，那么
+	$$C=\frac{\varepsilon S}{d}$$
+	\par 球形电容：设两个球内外半径$R_1$，$R_2$，那么
+	$$C=\frac{4\pi\varepsilon R_1R_2}{R_2-R_1}$$
+	\par 圆柱形电容：设两个圆柱内外半径$R_1$，$R_2$，长度为$L$，那么
+	$$C=2\pi\varepsilon L\left(\ln\frac{R_2}{R_1}\right)^{-1}$$
+	\subsection{电容器的能量}
+	\par 当电容器充入的电量为$Q$时，其能量为
+	$$W_C=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}CU^2=\frac{1}{2}QU$$
+	\par 这个能量是储存在电场中的，我们可以得到
+	$$W_C=\frac{1}{2}\varepsilon E^2Sd=\frac{1}{2}\varepsilon E^2V=w_eV$$
+	$$w_e=\frac{1}{2}\varepsilon E^2=\frac{1}{2}ED$$
+	\par 由此可以看出，插入电介质增加了电容器的电场能量密度以及电场能量。
+	\section{一些特殊的极化现象}
+	\subsection{击穿}
+	\par 当电场强度达到一定值的时候，分子的正负电荷中心进一步拉开，形成了自由移动的电荷，
+	电介质的绝缘性被破坏，这种现象称为电介质的\textbf{击穿}。
+	\par 电介质能承受的最大电场强度称为\textbf{击穿场强}或者\textbf{介电强度}。
+	\subsection{铁电体}
+	\par 铁电体是一种特殊的电介质，电极化强度\textbf{\textit{P}}与电场强度\textbf{\textit{E}}是非线性关系，
+	其图像称为电滞回线。铁电体相对介电常数很大，可以制作体积小的大电容器，并且是非线性的电容。
+	\subsection{压电效应}
+	\par 铁电体和部分晶体在拉伸或者压缩时也会发生极化现象，称为\textbf{压电效应}。压电效应也有逆效应，外加电场时，
+	沿着电场方向长度会发生变化，也就是\textbf{电致伸缩}，这种效应是非常微弱的。
+	\par 压电效应可以将机械振动转化为电振动，逆压电效应可以将电振动转化为机械振动。
+	
+	\chapter{稳恒电流}
+	\section{电荷、电场与电流}
+	\subsection{电流与电流密度}
+	\par 电荷运动形成电流。在导线连接的线路中，我们使用\textbf{电流（强度）}的概念来描述电流，对于导线中一个截面，
+	单位时间内通过的电荷就是电流强度
+	$$I=\frac{\mathrm{d}q}{\mathrm{d}t}$$
+	\par 假设导线截面积为$S$，载流子密度为$n$，单个载流子电荷量为$q$，载流子运动的平均速度为$\bar{v}$，则
+	$$I=nqS\bar{v}$$
+	\par 对于大块导体中的电流分布，我们用\textbf{电流密度}来描述。单位时间流过单位垂直面积的电荷量就是电流密度，
+	可以用\textbf{电流线}描述电流分布。
+	$$\textit{\textbf{j}}=\frac{\mathrm{d}I}{\mathrm{d}S_\perp}\hat{n}_\perp$$
+	\par 在前面的设定中，我们可以推导得到
+	$$\textbf{\textit{j}}=nq\bar{\textit{\textbf{v}}}$$
+	\par 电流和电流密度可以互相导出
+	$$\textit{\textbf{j}}=\frac{\mathrm{d}I}{\mathrm{d}S_\perp}\hat{n}_\perp$$
+	$$I=\iint\textbf{\textit{j}}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	\par 对于闭合曲面，我们有
+	$$\varoiint\textbf{\textit{j}}\cdot\mathrm{d}\textbf{\textit{S}}+\frac{\mathrm{d}q_0}{\mathrm{d}t}=0$$
+	$$\nabla\cdot\textbf{\textit{j}}+\frac{\mathrm{d}\rho}{\mathrm{d}t}=0$$
+	\par 这也被称为电流连续性方程。
+	\subsection{稳恒电流与稳恒电场}
+	\par 我们将电流密度不随时间变化的电流称为\textbf{稳恒电流}。稳恒电流满足
+	$$\varoiint\textbf{\textit{J}}\cdot\mathrm{d}\textbf{\textit{S}}=0$$
+	$$\nabla\cdot\textbf{\textit{J}}=0$$
+	\par 稳恒电流的电流线是闭合的，满足KCL方程
+	$$\sum_{i}I_{i}=0$$
+	\par 通有稳恒电流的电路中含有稳恒电场，由不随时间变化的电荷激发产生，这些电荷分布在导体的表面或界面，
+	但是导体中是有电场以及电荷运动的。维持稳恒电场需要能量。稳恒电场也满足环路定理，因而满足KVL方程
+	$$\sum_{i}v_{i}=0$$
+	\section{闭合电路}
+	\subsection{电阻}
+	\par 对于电阻，我们有\textbf{欧姆定律}
+	$$U=IR$$
+	其中
+	$$R=\rho\frac{L}{S}$$
+	$$G=\frac{1}{R}=\sigma\frac{S}{L}$$
+	\par 在微观情形下，我们可以得到欧姆定律的微分形式
+	$$\textbf{\textit{J}}=\sigma\textbf{\textit{E}}$$
+	$$\sigma=\frac{ne\tau}{m}$$
+	\par 同样我们也有焦耳定律
+	$$Q=I^2R$$
+	其微分形式为
+	$$p=\sigma E^2$$
+	\subsection{电动势}
+	\par 要维持稳恒电场，维持电势差，需要非静电力将正电荷从负极移到负极。非静电力对单位电荷做的功就是电动势
+	$$\mathcal{E}=\frac{A}{q}$$
+	如果从非静电力导出非静电场，那么电动势也可以定义为
+	$$\mathcal{E}=\int_{-}^{+}\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}$$
+	\subsection{欧姆定律}
+	\par 若电流$I$通过电阻为$R$的导体，则导体两端的电压为
+	$$U=IR$$
+	\par 对于均匀柱状导体，其电阻满足
+	\[
+	R=\rho\frac{l}{S}	
+	\]
+	\par 其对偶形式为
+	\[
+	I=UG
+	\]
+	\[
+	G=\sigma\frac{S}{l}	
+	\]
+	\par $\sigma$被称为\textbf{电导率}，欧姆定律的微分形式为
+	\[
+	\textbf{\textit{J}}=\sigma\textbf{\textit{E}}	
+	\]
+	\chapter{磁场\quad 磁力}
+	\section{毕奥$-$萨伐尔定律\quad 磁场的度量\quad}
+	\subsection{毕奥$-$萨伐尔定律}
+	\par 电荷激发电场，电流激发磁场。假设有一电流元$I\mathrm{d}\textbf{\textit{l}}$，则在距其位矢为$\textbf{\textit{r}}$处，产生的磁场的磁感应强度为
+	$$\mathrm{d}\textbf{\textit{B}}=\frac{\mu_0}{4\pi}\frac{I\mathrm{d}\textbf{\textit{l}}\times\hat{\textbf{\textit{r}}}}{r^2}$$
+	\par 其中$\mu_0$被称为\textbf{真空磁导率}，取值为$4\pi\times10^{-7}\mathrm{T\cdot m/A}$。电流元不会在自身方向上激发电场。
+	\par 磁场同样满足叠加定律
+	$$\textbf{\textit{B}}=\sum_{i}\textbf{\textit{B}}_{i}=\int\mathrm{d}\textbf{\textit{B}}$$
+	\subsection{磁场的度量}
+	\par 磁感应强度的单位是Tesla，简记为T。此外还常用单位Gauss，$1\mathrm{Tesla}=10^{4}\mathrm{Gauss}$。下面是三种度量磁场强弱的方式。
+	\par \textbf{从运动的电荷受力度量}\quad 运动的电荷会受到洛伦兹力的作用，我们有
+	$$\textbf{\textit{F}}=q\textbf{\textit{v}}\times\textbf{\textit{B}}$$
+	\par \textbf{从电流元的受力度量}\quad 通电导线在磁场中受到安培力的作用，我们有
+	$$\mathrm{d}\textbf{\textit{F}}=I\mathrm{d}\textbf{\textit{l}}\times\textbf{\textit{B}}$$
+	$$\textbf{\textit{F}}=\int_{L}I\mathrm{d}\textbf{\textit{l}}\times\textbf{\textit{B}}$$
+	\par \textbf{从磁矩受到的力矩度量}\quad 对于平面环形电流圈，设电流为$I$，面积矢量$S$，则定义其磁矩
+	$$\textbf{\textit{m}}=I\textbf{\textit{S}}$$
+	\par 其受到的磁场力矩为
+	$$\textbf{\textit{M}}=\textbf{\textit{m}}\times\textbf{\textit{B}}$$
+	\section{Gauss定理\quad 环路定理}
+	\subsection{Gauss定理}
+	\par 类比于电场线，我们可以用磁感线来描述磁场。磁感线不相交，无头无尾，是闭合的环线，与电流线相互套连，符合右手定则（通电导线、载流圈、载流螺线圈等）。可以定义磁通量
+	$$\mathrm{d}\Phi=\textbf{\textit{B}}\mathrm{d}\textbf{\textit{S}}$$
+	$$\Phi=\iint_{\Omega}\textbf{\textit{B}}\mathrm{d}\textbf{\textit{S}}$$
+	\par 对于封闭曲面的磁通量，有Gauss定律
+	$$\varoiint_{\Omega}\textbf{\textit{B}}\mathrm{d}\textbf{\textit{S}}=0$$
+	\par 这也说明磁场是无散场
+	$$\mathrm{div}\textbf{\textit{B}}=\nabla\cdot\textbf{\textit{B}}=0$$
+	\par 磁荷也是电磁学的一种观点，但是现在没有充足的证据表明磁荷的存在。
+	$$\iint_{\Omega}\textbf{\textit{B}}\mathrm{d}\textbf{\textit{S}}=q$$
+	\subsection{环路定理}
+	在恒定电流的磁场中，磁感应强度$\textbf{\textit{B}}$沿任何闭合路径$L$的积分等于路径$L$所环绕的电流强度的代数和的$\mu_0$倍。这就是\textbf{安培环路定理}：
+	$$\oint_{L}\textbf{\textit{B}}\cdot\mathrm{d}\textbf{\textit{l}}=\mu_0\sum_{i}I_{i}$$
+	\par 其中，$I$指与闭合路径套连的电流，满足右手螺旋关系取正值，满足左手螺旋关系取负值，但是$B$的产生与空间中的电流都有关。同时这个定理说明磁场是非保守场，是有旋场。
+	\section{典型磁场分布}
+	\par 可以利用毕奥$-$萨伐尔定律、安培环路定理求得空间的磁场分布。
+	\subsection{通电直导线}
+	\par 按照电场中的角度设定，如果导线中通入电流$I$，则距离导线位置为$d$处，磁场大小为
+	$$B=\frac{\mu_0I}{4\pi d}(\cos\theta_1-\cos\theta_2)$$
+	\par 特别地，对于无线长导线而言
+	$$B=\frac{\mu_0I}{2\pi d}$$
+	\subsection{通电圆环}
+	\par 一个半径为$R$的圆环通有电流$I$，其轴线$x$处，与轴垂直的分量记为$B_\perp$，轴上的分量记为$B_{//}$，则有
+	$$B_\perp=0$$
+	$$B_{//}=\frac{\mu_0IR}{2(R^2+x^2)^\frac{3}{2}}=\frac{\mu_0IR^2}{2r^3}=\frac{\mu_0IS}{2\pi r^3}$$
+	\par 在环心处，磁场强度为
+	$$B=\frac{\mu_0I}{2R}$$
+	\par 单个通电圆环的电场分布与一对电偶极子的电场分布是类似的，因此这个圆环又叫做磁偶极子，定义磁偶极矩
+	$$\textbf{\textit{m}}=I\textbf{\textit{S}}$$
+	\subsection{通电螺线管}
+	\par 现在有长为$L$，半径为$R$，缠绕$n$匝线圈，所通入电流为$I$的直螺线管，在轴线上一点处建系，设两端倾斜角分别为$\beta_1$，$\beta_2$，则轴线上这一点的磁场强度为
+	$$B=\frac{\mu_0nI}{2}(\cos\beta_2-\cos\beta_1)$$
+	\par 在螺线管中部，磁场近似为匀强磁场。当螺线管无限长的时候，内部磁场（不仅仅是轴线）
+	$$B=\mu_0nI$$
+	\par 不仅仅是螺线管，任意形状的线圈都有这样的特点，因而螺线管常用于形成匀强磁场。此外，亥姆霍兹线圈也常常用于产生匀强磁场。
+	\subsection{匀速运动的点电荷的磁场}
+	\par 对于以速度$\textbf{\textit{v}}$运动的电荷，其在位矢$\textbf{\textit{r}}$处产生的磁场为
+	$$\textbf{\textit{B}}=\frac{\mu_0}{4\pi}\frac{q\textbf{\textit{v}}\times\hat{\textbf{\textit{r}}}}{r^2}$$
+	\section{磁力}
+	\par 下面介绍几种磁场的作用力。
+	\subsection{洛伦兹力}
+	电荷$q$以速度$\textbf{\textit{v}}$在磁场$\textbf{\textit{B}}$内运动时，受到的磁场作用力为
+	$$\textbf{\textit{F}}=q\textbf{\textit{v}}\times\textbf{\textit{B}}$$
+	\par 假设$v$与$B$夹角为$\theta$，则有
+	$$v_\perp=v\sin\theta$$
+	$$v_{//}=v\cos\theta$$
+	$$F=qv_\perp B=qvB\sin\theta$$
+	\par 当速度与磁场方向相同时，粒子做匀速直线运动。当速度与磁场方向垂直时，粒子做匀速圆周运动，此时有
+	$$qv_{\perp}B=m\frac{v_\perp^2}{r}$$
+	$$r=\frac{mv_\perp}{qB}=\frac{p_\perp}{qB}$$
+	$$T=\frac{2\pi m}{qB}$$
+	\par 如果不是上面两种特殊情况，粒子将螺旋运动，设螺旋半径$r$，螺距$l$，则
+	$$r=\frac{mv\sin\theta}{qB}$$
+	$$h=Tv_{//}=\frac{2\pi mv\cos\theta}{qB}$$
+	\par 带电粒子在磁场中的运动有很多应用，例如磁聚焦、磁瓶（磁镜）、磁约束、质谱仪、回旋加速器、磁流体发电等。其中一个重要的应用是\textbf{霍尔效应}。
+	\par 载流子受到的洛伦兹力和电场力相等时，有
+	$$E_{H}q=qvB$$
+	$$E_{H}=vB$$
+	\par 设导体的宽度（磁场方向）为$b$,高度（电场方向）为$h$，则有
+	$$I=nqSv=nqbhv$$
+	\par 设霍尔电压为$U_H$，则有
+	$$U_H=E_Hh=vBh=\frac{IB}{nqb}$$
+	\par 定义霍尔系数$K_H$和霍尔电阻$R_H$，我们有
+	$$U_H=K_H\frac{IB}{b}$$
+	$$K_H=\frac{1}{nq}$$
+	$$U_H=R_HI$$
+	$$R_H=\frac{B}{nqb}$$
+	\par 利用霍尔效应，可以辨别N型半导体和P型半导体，也可以用来测定磁场强度。
+	\subsection{安培力}
+	\par 通电导线在磁场中的受力为
+	$$\textbf{\textit{F}}=\int_{L}I\mathrm{d}\textbf{\textit{l}}\times\textbf{\textit{B}}$$
+	\par 如果通电直导线长度为$L$，电流为$I$，与磁场垂直，则
+	$$F=BIL$$
+	\par 两根无限长平行导线，通入电流$I_1$，$I_2$，两根导线的距离为$d$，则电流同向时，导线相吸；电流反向时，导线相斥，作用力为
+	$$F=\frac{\mu_0I_1I_2}{2\pi d}$$
+	\par 安培力的应用也有很多，例如电动机、电压表和电流表、电磁炮等。安培力也与单位制有关，SI中电流和电荷单位的规定就是依靠安培力作出的。当两根电流大小相等、相距1m的导线产生的作用力大小为$2\times10^{-7}\mathrm{N}$时，导线中的电流大小定义为1A。
+	\par 此外，对于真空介电常数$\varepsilon_0$，真空磁导率$\mu_0$之间满足如下关系
+	$$\varepsilon_0\mu_0c^2=1$$
+	\par 而光速值一般是常数，我们\textbf{规定}$\mu_0$的数值，就可以\textbf{计算}出$\varepsilon_0$的值。因此这两个值都不是靠测定获得的，而是人为规定的准确值。
+	
+\chapter{磁介质}
+	\section{介质的极化}
+	\subsection{介质的极化过程与描述}
+	\par 常见的磁介质可以分为\textbf{顺磁质}与\textbf{抗磁质}。在原子中，其电子具有轨道磁矩和自旋磁矩，原子核也具有磁矩（相比于电子磁矩较小），这些构成了原子的磁矩。而一个分子中所有原子磁矩的和则构成了分子磁矩，可以进一步等效为分子电流。
+	\par 将介质放在磁场中，顺磁质和抗磁质都会极化。其中，顺磁质的分子磁矩不为0，称为\textbf{固有磁矩}。原本散乱的分子磁矩会在磁场的作用下排列整齐，方向与原来的磁场方向相同，因此会增强磁场。抗磁质的分子磁矩为0，但是会产生\textbf{感应磁矩}（原子磁矩进动导致），方向与原来的磁场相反 ，所以会削弱磁场。
+	\par 我们用\textbf{磁化强度}$M$来描述介质受到极化的程度，其定义为
+	$$\textbf{\textit{M}}=\frac{\sum_{i}\textbf{\textit{m}}_i}{\Delta V}$$
+	\par 与磁感应强度的关系是
+	$$\textbf{\textit{M}}=\frac{\mu_r-1}{\mu_r\mu_0}\textbf{\textit{B}}$$
+	\par 其中$\mu_r$称为相对磁导率，而$\mu=\mu_0\mu_r$称为介质的\textbf{磁导率}。对于顺磁质，$\mu_r>$，对于抗磁质，$\mu_r<1$。定义磁极化率$\chi=\mu_r-1$，则上面的式子可以写成
+	$$\textbf{\textit{M}}=\chi\frac{\textbf{\textit{B}}}{\mu}$$
+	\subsection{介质极化对电流与磁场的影响}
+	\par \textbf{对电流的影响}\quad 介质极化会产生极化电流，极化电流进一步产生极化磁场，并与原来的磁场叠加。在介质中，考虑矢量$\mathrm{d}\textbf{\textit{l}}$，设分子数密度为$n$，单个分子极化电流为$i'$，则与之相铰的总分子电流为
+	$$\mathrm{d}I'=n(\pi r^2\mathrm{d}l\cos\theta)i'$$
+	那么
+	$$\mathrm{d}I'=\textbf{\textit{M}}\cdot\mathrm{d}\textbf{\textit{l}}$$
+	$$I'=\oint\textbf{\textit{M}}\cdot\mathrm{d}\textbf{\textit{l}}$$
+	\par 在磁介质的表面，会产生磁化面电流，并定义面束缚磁化电流密度$\textbf{\textit{j}}'$，那么
+	$$j'=\frac{\mathrm{d}I'}{\mathrm{d}l}=\frac{M\mathrm{d}l\cos\theta}{\mathrm{d}l}=M\cos\theta$$
+	因此
+	$$\textbf{\textit{j}}'=\textbf{\textit{M}}\times\hat{\textbf{\textit{n}}}$$
+	\par 对于均匀磁化的介质而言，其内部极化电流为0。
+	$$I'=\oint\textbf{\textit{M}}\cdot\mathrm{d}\textbf{\textit{l}}=\textbf{\textit{M}}\cdot\oint\mathrm{d}\textbf{\textit{l}}=0$$
+	\par 极化磁场与原来的磁场叠加得到新的磁场，与原来磁场的磁感应强度的关系为
+	$$\textbf{\textit{B}}=\textbf{\textit{B}}_0+\textbf{\textit{B}}'=\mu_r{\textbf{\textit{B}}_0}$$
+	\section{磁场强度}
+	\par 对应于电位移矢量，考虑一个环路，其中有传导电流$I_i$，也有磁介质产生的极化电流$I'$，那么根据磁场的环路定理，我们有
+	$$\oint\textbf{\textit{B}}\cdot\mathrm{d}\textbf{\textit{l}}=\mu_0\left(\sum_{i}I_i+\sum_{j}I'_j\right)$$
+	$$\sum_{j}I'_j=\oint\textbf{\textit{M}}\cdot\mathrm{d}\textbf{\textit{l}}$$
+	\par 整理可得
+	$$\oint\left(\frac{\textbf{\textit{B}}}{\mu_0}-\textbf{\textit{M}}\right)\cdot\mathrm{d}\textbf{\textit{l}}=\sum_{i}I_i$$
+	\par 这样，我们定义\textbf{磁场强度}$\textbf{\textit{H}}$：
+	$$\textbf{\textit{H}}=\frac{\textbf{\textit{B}}}{\mu_0}-\textbf{\textit{M}}$$
+	\par 并得到了它的环路定理
+	$$\oint\textbf{\textit{H}}\cdot\mathrm{d}\textbf{\textit{l}}=\sum_{i}I_i$$
+	\par 这样，在知道传导电流后，就可以求出磁场强度，进一步求出磁感应强度和磁化强度。磁感应强度、磁化强度与磁场强度的关系为
+	$$\textbf{\textit{M}}=\frac{\mu_r-1}{\mu_r\mu_0}\textbf{\textit{B}}=\frac{\mu_r-1}{\mu}\textbf{\textit{B}}$$
+	$$\textbf{\textit{H}}=\frac{\textbf{\textit{B}}}{\mu_0}-\textbf{\textit{M}}=
+	\frac{\textbf{\textit{B}}}{\mu_r\mu_0}=\frac{\textbf{\textit{B}}}{\mu}$$
+	$$\textbf{\textit{M}}=(\mu_r-1)\textbf{\textit{H}}=\chi\textbf{\textit{H}}$$
+	\section{边值关系}
+	\par 假设磁力线或者磁场强度线从介质1进入介质2，两种介质的磁导率为$\mu_1$，$\mu_2$，下面我们考虑其边值关系。
+	\subsection{切向关系}
+	\par 考虑磁场强度的环路定理，我们有
+	$$\oint\textbf{\textit{H}}\cdot\mathrm{d}\textbf{\textit{l}}=\sum_{i}I_i$$
+	\par 这里如果传导电流为0，则有
+	$$H_{1t}=H_{2t}$$
+	\par 同时我们有$\textbf{\textit{B}}=\mu\textbf{\textit{H}}$，那么
+	$$\frac{B_{1t}}{\mu_1}=\frac{B_{2t}}{\mu_2}$$
+	\par 也就是
+	$$\frac{B_{1t}}{B_{2t}}=\frac{\mu_1}{\mu_2}$$
+	\par 因此，磁场从一个介质到另一个介质时，\textbf{磁场强度切向分量不变，磁感应强度切向分量与介质磁导率成正比}。
+	\subsection{切向关系}
+	\par 考虑磁感应强度的Gauss定理，我们有
+	$$\varoiint\textbf{\textit{B}}\cdot\mathrm{d}\textbf{\textit{S}}=0$$
+	\par 我们可以得到
+	$$B_{1n}=B_{2n}$$
+	\par 考虑磁感应强度与磁场强度的关系，我们有
+	$$\mu_1H_{1n}=\mu_2H_{2n}$$
+	$$\frac{H_{1n}}{H_{2n}}=\frac{\mu_2}{\mu_1}$$
+	\par 也就是说，磁场从一个介质到另一个介质时，\textbf{磁感应强度法向分量不变，磁场强度法向分量与介质磁导率成反比}。
+	\subsection{折射规律}
+	\par 综合上面的讨论，现在考虑磁感应强度线的折射，假设入射角为$\beta_1$，出射角为$\beta_2$，那么
+	$$\frac{\tan\beta_1}{\tan\beta_2}=\frac{B_{1t}}{B_{1n}}\frac{B_{2n}}{B_{2t}}=\frac{B_{1t}}{B_{2t}}\frac{B_{2n}}{B_{1n}}=\frac{\mu_1}{\mu_2}$$
+	\par 考虑磁场强度线的折射，假设入射角为$\eta_1$，出射角为$\eta_2$，那么
+	$$\frac{\tan\eta_1}{\tan\eta_2}=\frac{H_{1t}}{H_{1n}}\frac{H_{2n}}{H_{2t}}=\frac{H_{1t}}{H_{2t}}\frac{H_{2n}}{H_{1n}}=\frac{\mu_1}{\mu_2}$$
+	\par 也就是说，无论是磁感应强度还是磁场强度，都有
+	$$\frac{\tan\theta_1}{\tan\theta_2}=\frac{\mu_1}{\mu_2}$$
+	\par 如果从空气进入铁磁质，那么我们有$\mu_1\approx1$，$\mu_2\gg1$，我们可以得到
+	$$\theta_2\approx\frac{\pi}{2}$$
+	\par 这意味着，磁场线在铁磁质中传播时与表面平行，铁磁质可以将磁场线集中在内部。
+	\section{磁路}
+	\par 磁路理论类似于电路。假设有一介质圆环，其长度为$l$，截面积为$S$，磁导率为$\mu$；其中有一段是另一种介质，其长度为$l_0$，截面积为$S_0$，磁导率为$\mu_0$。圆环缠绕$N$匝线圈，通入电流为$I$，则根据磁场强度的环路定理，有
+	$$\oint\textbf{\textit{H}}\cdot\mathrm{d}\textbf{\textit{l}}=NI$$
+	\par 也就是
+	$$Hl+H_0l_0=NI$$
+	\par 其中$H$是$\mu$对应的磁场强度值，而$H_0$则是$\mu_0$对应的磁场强度值。我们还可以得到
+	$$\frac{B}{\mu}l+\frac{B_0}{\mu_0}l_0=NI$$
+	\par 我们将$\Phi=BS$称为磁通量，并\textbf{类比于电路理论中的电流}，则这个环路中的磁通都是相同的，那么
+	$$\frac{\Phi}{S\mu}l+\frac{\Phi}{S_0\mu_0}l_0=NI$$
+	\par 整理可得
+	$$\Phi=\frac{NI}{\frac{1}{\mu}\frac{l}{S}+\frac{1}{\mu_0}\frac{l_0}{S_0}}$$
+	\par 我们定义磁动势为
+	$$\mathcal{E}_m=NI$$
+	\par 定义磁阻（与电阻很类似）
+	$$R_m=\frac{1}{\mu}\frac{l}{S}$$
+	$$R_{m0}=\frac{1}{\mu_0}\frac{l_0}{S_0}$$
+	\par 最终得到
+	$$\Phi=\frac{\mathcal{E}_m}{R_m+R_{m0}}$$
+	\par 这就是磁路中的\textbf{闭合电路欧姆定律}，相应于电路理论中
+	$$I=\frac{\mathcal{E}_e}{R_e+R_{e0}}$$
+	$$R_e=\rho\frac{l}{S}$$
+	\section{一些特殊的极化现象}
+	\par 铁磁体是一种特殊的介质，在磁化时，$\textbf{\textit{B}}$与$\textbf{\textit{H}}$是非线性关系，
+	与铁电体比较相似。关系曲线比较“胖”的材料，称之为“硬磁材料”，一般用来制作永久磁铁；
+	关系曲线比较“瘦”的材料，称之为“软磁材料”，一般用来制作变压器、电磁铁等的铁芯。
+	\par 铁磁体的这种效应与\textbf{磁畴}有关，是铁磁质中已经存在的许多自发的均匀磁化小区域。
+	没有外磁场时，各磁畴的自发磁化方向杂乱，不显磁性。加外磁场时，磁畴发生变化。外磁场较弱时，
+	和外磁场方向相同的磁畴体积扩大；外磁场较强时，每个磁畴的磁矩方向都程度不同地向外磁场方向靠拢，
+	即取向。磁感应强度增加到一定值后，磁畴方向均指同一方向，铁磁质达到饱和。
+	
+	\chapter{电磁感应}
+	\section{感生电动势与动生电动势}
+	\subsection{电磁感应定律}
+	\par 感应电流的磁通总是阻止原磁通的变化，这就是\textbf{楞次定律}。更精确地，我们可以得到\textbf{电磁感应定律}。
+	对于单圈导线
+	\[
+	\varepsilon=-\frac{\mathrm{d}\Phi}{\mathrm{d}t}	
+	\]
+	\par 其中，$\Phi$的方向与导线中电流的方向应该成右手螺旋关系。对于多圈导线，有
+	\[
+	\varepsilon=-\sum_{i}\frac{\mathrm{d}\Phi_i}{\mathrm{d}t}=-\frac{\mathrm{d}}{\mathrm{d}t}\sum_{i}\Phi_i	
+	\]
+	我们定义\textbf{全磁通}或者\textbf{磁链}$\Psi$为
+	\[
+	\Psi=\sum_{i}\Phi_i	
+	\]
+	那么
+	\[
+	\varepsilon=-\frac{\mathrm{d}\Psi}{\mathrm{d}t}	
+	\]
+	\par 对于通电螺线管，如果螺线管有$N$匝，单圈的磁通为$\Phi$，则有
+	\[
+	\varepsilon=-N\frac{\mathrm{d}\Phi}{\mathrm{d}t}	
+	\]
+	\subsection{感生电动势}
+	\par 在磁场中放置导体回路，现在回路静止，磁场变化，则回路中会产生电流，进而说明回路中有电动势，
+	有非静电力对载流子的作用。根据前面对闭合电路的介绍，可以根据非静电力建立非静电场，这就是\textbf{感生电场}，
+	其形成的电动势称为\textbf{感生电动势}。感生电场与静电场的性质是不同的，其电场线是闭合曲线。我们有
+	\[
+	\varepsilon=\oint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}	
+	\]
+	\[
+	\varepsilon=-\frac{\mathrm{d}}{\mathrm{d}t}\iint\textbf{\textit{B}}\cdot\mathrm{d}\textbf{\textit{S}}
+	=-\iint\frac{\partial\textbf{\textit{B}}}{\partial t}\cdot\mathrm{d}\textbf{\textit{S}}
+	\]
+	\par 因此
+	\[
+	\oint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=
+	-\iint\frac{\partial\textbf{\textit{B}}}{\partial t}\cdot\mathrm{d}\textbf{\textit{S}}
+	\]
+	\par 同时，因为感生电场的电场线是闭合的，我们有
+	\[
+	\varoiint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{S}}=0	
+	\]
+	\subsection{动生电动势}
+	\par 在磁场中放置导体回路，现在磁场恒定，导体运动，则导体中会产生电流，这是因为产生了\textbf{动生电动势}，
+	相应的非静电力是洛伦兹力。我们可以得到
+	\[
+	\varepsilon=-Blv	
+	\]
+	相应的非静电场为
+	\[
+	\textbf{\textit{E}}=\textbf{\textit{v}}\times\textbf{\textit{B}}	
+	\]
+	\\
+	\par 总结一下，无论是动生电动势，还是感生电动势，求电动势都有两种方法。
+	\par (1)根据电动势的定义。
+	\[
+	\varepsilon=\oint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}=
+	-\iint\frac{\partial\textbf{\textit{B}}}{\partial t}\cdot\mathrm{d}\textbf{\textit{S}}
+	\quad\text{或者}\quad
+	\int(\textbf{\textit{v}}\times\textbf{\textit{B}})\cdot\mathrm{d}\textbf{\textit{l}}
+	\]
+	\par (2)根据电磁感应定律。
+	\[
+	\varepsilon=-N\frac{\mathrm{d}\Phi}{\mathrm{d}t}	
+	\]
+	\section{互感与自感}
+	\subsection{互感}
+	\par 将两个线圈放置在一起，在线圈1中通入电流，则线圈1会相应产生磁场，这个磁场相应在线圈2形成磁链，
+	记作$\Psi_{1\rightarrow 2}$，这个量与线圈1中的电流$i_1$成正比，定义
+	\[
+	M_{1\rightarrow 2}=\frac{\Psi_{1\rightarrow 2}}{i_1}
+	\]
+	称为线圈1对线圈2的\textbf{互感系数}。互感系数与$i_1$无关，与线圈大小、匝数、位置等有关。这样，我们有
+	\[
+	\varepsilon_2=-\frac{\mathrm{d}\Psi_{1\rightarrow 2}}{\mathrm{d}t}=
+	-M_{1\rightarrow 2}\frac{\mathrm{d}i_1}{\mathrm{d}t}
+	\]
+	\subsection{自感}
+	\par 当一个线圈中的电流变化时，内部也会产生变化的电场，因而会产生感应电动势。我们有
+	\[
+	\varepsilon=-L\frac{\mathrm{d}i}{\mathrm{d}t}	
+	\]
+	我们称$L$为\textbf{自感系数}。
+	\section{电磁感应的应用}
+	\par\textbf{交流发电机}
+	\[
+	\varepsilon=-N\frac{\mathrm{d}(BS\cos\omega t)}{\mathrm{d}t}
+	=NBS\omega\sin\omega t	
+	\]
+	\[
+	\varepsilon_{max}=NBS\omega	
+	\]
+	\par\textbf{感应加速器}
+	磁场一方面让粒子做圆周运动，一方面让其加速。轨道磁场应该满足
+	\[
+	B_{guide}(t)=\frac{1}{2}\bar{B}(t)	
+	\]
+	\par\textbf{涡流}
+	单位长度的热功率与半径的平方成正比，越外圈发热功率越大。有的时候需要减小涡流，
+	例如变压器的铁芯使用绝缘硅钢片做的。涡流会产生一些机械效应，例如电磁阻尼和电磁驱动等。
+	\section{磁场的能量}
+	\par 类比电容充电的过程，对电感线圈充电，我们可以得到电感储存的能量为
+	\[
+	W_{m}=\frac{1}{2}LI^2=\frac{1}{2}\frac{\Psi^2}{L}=\frac{1}{2}\Psi I
+	\]
+	\par 进一步可以得到
+	\[
+	W_{m}=\frac{B^2}{2\mu}V=w_{m}V	
+	\]
+	\[
+	w_m=\frac{1}{2}\frac{B^2}{\mu}=\frac{1}{2}BH	
+	\]
+	其中$w_{m}$称为\textbf{磁场能量密度}。那么磁场能量就可以表示为
+	\[
+	W_{m}=\iiint w_{m}\mathrm{d}V=\iiint\frac{B^2}{2\mu}\mathrm{d}V	
+	\]
+	
+	\chapter{Maxwell方程组与电磁辐射}
+	\section{位移电流}
+	\par 引入位移电流，一是建立了与“变化磁场产生电场”相应的“变化电场产生磁场”理论；
+	二是解决了充电中的电容器其磁场强度环路定理以及KCL方程不成立的矛盾。
+	\par 设定一个闭合曲面，我们知道电流连续性方程
+	\[
+	\varoiint\textbf{\textit{J}}\cdot\mathrm{d}\textbf{\textit{S}}+
+	\frac{\mathrm{d}q_0}{\mathrm{d}t}=0	
+	\]
+	\par 如果闭合曲面内部电荷没有变化，则电荷微分项为0，满足KCL方程。如果曲面内有电容一类元件，则存在电荷变化。
+	这个时候我们有
+	\[
+	\frac{\mathrm{d}q_0}{\mathrm{d}t}=\frac{\mathrm{d}}{\mathrm{d}t}\varoiint\textbf{\textit{D}}\cdot\mathrm{d}
+	\textbf{\textit{S}}=
+	\varoiint\frac{\partial\textbf{\textit{D}}}{\partial t}\cdot\mathrm{d}\textbf{\textit{S}}	
+	\]
+	\[
+	\varoiint\left(\textbf{\textit{J}}_c+\frac{\partial\textbf{\textit{D}}}{\partial t}\right)\cdot\mathrm{d}
+	\textbf{\textit{S}}=0	
+	\]
+	这样我们就可以得到
+	\[
+	I_c+I_d=0	
+	\]
+	\[
+	\sum_{i}i_{c,i}+\sum_{j}i_{d,j}=0	
+	\]
+	\par Maxwell引入了\textbf{位移电流}的概念，在传统的传导电流之上加上位移电流，电流就是连续的了。加上位移电流，
+	即使是正在充电的电容器，其KCL方程依然成立。同样，修正后磁场强度的环路定理为
+	\[
+	\oint\textbf{\textit{H}}\cdot\mathrm{d}\textbf{\textit{l}}=
+	\iint\left(\textbf{\textit{J}}+\frac{\partial\textbf{\textit{D}}}{\partial t}\right)\cdot\mathrm{d}\textbf{\textit{S}}
+	\]
+	\par 位移电流假说实质上就是“电生磁”。其于传导电流的不同点在于：位移电流不产生焦耳热，可以存在与真空、介质、导体，
+	而位移电流只能存在于导体中。
+	\section{Maxwell方程组}
+	\par 对于电，我们主要用电场强度$\textbf{\textit{E}}$来描述，而在介质中，我们引入电位移矢量$\textbf{\textit{D}}$
+	\[
+	\textbf{\textit{D}}=\varepsilon_0\textbf{\textit{E}}+\textbf{\textit{P}}
+	=\varepsilon\textbf{\textit{E}}	
+	\]
+	\par 下面是描述电场性质的环路定理与Gauss定理。
+	\[
+	\oint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}
+	=-\iint\frac{\partial\textbf{\textit{B}}}{\partial t}\cdot\mathrm{d}\textbf{\textit{S}}
+	\]
+	\[
+	\varoiint\textbf{\textit{D}}\cdot\mathrm{d}\textbf{\textit{S}}=
+	\iiint\rho_0\mathrm{d}V	
+	\]
+	\par 对于磁，我们主要用磁感应强度$\textbf{\textit{B}}$来描述，而在介质中，我们引入磁场强度$\textbf{\textit{H}}$
+	\[
+	\textbf{\textit{H}}=\frac{\textbf{\textit{B}}}{\mu_0}-\textbf{\textit{M}}=\frac{\textbf{\textit{B}}}{\mu}	
+	\]
+	\par 下面是描述磁场性质的环路定理与Gauss定理。
+	\[
+	\oint\textbf{\textit{H}}\cdot\mathrm{d}\textbf{\textit{l}}=
+	\iint\left(\textbf{\textit{J}}+\frac{\partial\textbf{\textit{D}}}{\partial t}\right)\cdot\mathrm{d}\textbf{\textit{S}}
+	\]
+	\[
+	\varoiint\textbf{\textit{B}}\cdot\mathrm{d}\textbf{\textit{S}}=0
+	\]
+	\par 这四个性质合在一起，就是\textbf{Maxwell方程组(积分形式)}
+	$$\oint\textbf{\textit{H}}\cdot\mathrm{d}\textbf{\textit{l}}=
+	\iint\left(\textbf{\textit{J}}+\frac{\partial\textbf{\textit{D}}}{\partial t}\right)
+	\cdot\mathrm{d}\textbf{\textit{S}}$$
+	$$\varoiint\textbf{\textit{B}}\cdot\mathrm{d}\textbf{\textit{S}}=0$$
+	$$\oint\textbf{\textit{E}}\cdot\mathrm{d}\textbf{\textit{l}}
+	=-\iint\frac{\partial\textbf{\textit{B}}}{\partial t}\cdot\mathrm{d}\textbf{\textit{S}}$$
+	$$\varoiint\textbf{\textit{D}}\cdot\mathrm{d}\textbf{\textit{S}}=
+	\iiint\rho_0\mathrm{d}V$$
+	\par 如果利用Gauss公式和Stokes公式
+	$$\varoiint\textbf{\textit{F}}\cdot\mathrm{d}\textbf{\textit{S}}=
+	\iiint\nabla\cdot\textbf{\textit{F}}\mathrm{d}V$$
+	\[
+	\oint\textbf{\textit{F}}\cdot\mathrm{d}\textbf{\textit{l}}=
+	\iint(\nabla\times\textbf{\textit{F}})\cdot\mathrm{d}\textbf{\textit{S}}	
+	\]
+	就可以得到\textbf{Maxwell方程组(微分形式)}
+	\begin{align*}
+	\nabla\times\textbf{\textit{H}}&=
+	\textbf{\textit{J}}+\frac{\partial\textbf{\textit{D}}}{\partial t}\\
+	\nabla\cdot\textbf{\textit{B}}&=0\\	
+	\nabla\times\textbf{\textit{E}}&=-\frac{\partial\textbf{\textit{B}}}{\partial t}\\
+	\nabla\cdot\textbf{\textit{D}}&=\rho_0\\
+	\end{align*}
+	\section{电磁波}
+	\subsection{电磁场与波}
+	\par Maxwell预言了变化的电磁场以波的形式传播，在各向同性介质中，若满足$\textbf{\textit{J}}_c=0$，$\rho_0=0$，
+	对于沿着$x$轴传播的电磁场，满足
+	\[
+	\frac{\partial^2 E_y}{\partial x^2}=\mu\varepsilon\frac{\partial^2 E_y}{\partial t^2}	
+	\]
+	\[
+	\frac{\partial^2 H_z}{\partial x^2}=\mu\varepsilon\frac{\partial^2 H_z}{\partial t^2}	
+	\]
+	\par 参考波动方程
+	\[
+	\frac{\partial^2 \xi}{\partial x^2}=\frac{1}{v^2}\frac{\partial^2 \xi}{\partial t^2}	
+	\]
+	\par 可以得到波速为
+	\[
+	v=\frac{1}{\sqrt{\mu\varepsilon}}	
+	\]
+	\subsection{电磁波的能量}
+	\par 真空中的电磁波满足
+	\[
+	\textbf{\textit{E}}=\textbf{\textit{B}}\times\textbf{\textit{c}}	
+	\]
+	\par 一般情况下，光速可以换成电磁波的波速。我们知道电场和磁场的能量密度
+	\[
+	w_e=\frac{1}{2}\varepsilon E^2	
+	\]
+	\[
+	w_m=\frac{1}{2}\frac{B^2}{\mu}	
+	\]
+	代入$E=Bv$，可以得到$w_e=w_m$，因此电磁波的能量密度
+	\[
+	w=w_e+w_m=\varepsilon E^2=\frac{B^2}{\mu}	
+	\]
+	\par 除了用能量密度外，也常用\textbf{Poynting矢量(能流密度矢量)}描述电磁波的能量。其方向与电磁波传播方向相同，
+	其大小为：对于垂直传播方向的平面，单位时间内通过单位面积的能量大小。Poynting矢量的计算为
+	\[
+	\textbf{\textit{S}}=\textbf{\textit{E}}\times\textbf{\textit{H}}	
+	\]
+	\par 整理可以得到Poynting矢量大小与能量密度的关系为
+	\[
+	S=vw	
+	\]
+	\par 此外，电磁波的动量可以表示为
+	\[
+	p=\frac{w}{c}	
+	\]
+\end{document}
