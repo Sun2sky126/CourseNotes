@@ -1,0 +1,977 @@
+
+    \chapter{线性电阻电路}
+
+    \section{单端口线性电阻电路}
+    \subsection{基本方法}
+    \par 对于单端口网络，我们用关联参考方向来定义。为了得到端口的伏安特性，可以使用\textbf{加压求流法}或
+    \textbf{加流求压法}，也就是在端口接恒压源或恒流源，测定端口电流或电压，得到伏安特性。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (1,2) rectangle (3,-2);
+            \draw (0,1) to[short] (-1,1) to[V=$v_{test}$] (-1,-1) to[short] (0,-1);
+            \draw (0,1) to[short,o-,l=$i_{test}$] (1,1);
+            \draw (0,-1) to[short,o-] (1,-1);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (1,2) rectangle (3,-2);
+            \draw (0,1) to[short] (-1,1) to[I_=$i_{test}$] (-1,-1) to[short] (0,-1);
+            \draw (0,1) to[short,o-] (1,1);
+            \draw (0,-1) to[short,o-] (1,-1);
+            \draw[-stealth] (0,0.5) -- (0,-0.5);
+            \node[right=0.05cm] at (0,0) {$v_{test}$};
+        \end{tikzpicture}
+    \end{center}
+    \subsection{戴维南定理与诺顿定理}
+    \par 如果网络中含有线性电阻、独立恒流源、独立恒压源中的若干个，则根据叠加定理，测试电压与测试电流必然
+    是线性关系
+    \[
+    v_{test}=\alpha i_{test}+\beta   
+    \]
+    \par 我们令$\alpha=R_{TH}$，$\beta=v_{TH}$，这样就将其等效为了戴维南电压源。
+    \[
+    i_{test}=\alpha v_{test}+\beta    
+    \]
+    \par 我们令$\alpha=G_N$，$\beta=i_{N}$，这样就将其等效为了诺顿电流源。
+    \par 对于这样的单端口线性电阻网络，既可以等效为戴维南源，又可以等效为诺顿源，其关系为
+    \[
+    R_{TH}=R_{N}    
+    \]
+    \[
+    v_{TH}=R_{TH}i_{N}    
+    \]
+    \par 由此我们可以得到戴维南定理和诺顿定理：一
+    个包含独立电源的单端口线性电阻
+    网络，其端口等效电路可表述为一
+    个恒压源和一个电阻的串联，源电
+    压为端口开路电压，串联电阻为电
+    阻网络内所有独立电源置零时的端
+    口等效电阻。一个包含
+    独立电源的单端口线性电阻网络，其
+    端口等效电路可表述为一个恒流源和
+    一个电阻的并联，源电流为端口短路
+    电流，并联电阻为电阻网络内所有独
+    立电源置零时的端口等效电阻。
+    \par 这里的“独立源置零”指的是，独立电压源短路处理，独立电流源开路处理，受控源保持不变。\par
+    \begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \bfseries 表达式 & $v=R_{TH}i+v_{TH}$ & $i=G_{N}v+i_{N}$ \\
+        \hline
+        \bfseries 等效电路图 &
+        \begin{tikzpicture}
+            \draw (3,3) to[R=$R_{TH}$,o-] (0,3) to[V=$v_S$] (0,0) to[short,-o] (3,0);
+        \end{tikzpicture} &
+        \begin{tikzpicture}
+            \draw (3,3) to[short,o-] (0,3) to[I=$i_S$] (0,0) to[short,-o] (3,0);
+            \draw (1.5,3) to[R=$R_N$,*-*] (1.5,0);
+        \end{tikzpicture}\\
+        \hline
+    \end{tabular}\end{center}
+    \[
+    v_{TH}=v_{test}|_{i_{test}=0}    
+    \]
+    \[
+    R_{TH}=\left.\frac{v_{test}}{i_{test}}\right|_{v_{TH}=0}    
+    \]
+    \[
+    i_{N}=i_{test}|_{v_{test}=0}    
+    \]
+    \[
+    G_{N}=\left.\frac{i_{test}}{v_{test}}\right|_{i_{N}=0}    
+    \]
+
+    \section{二端口线性电阻电路}
+    \subsection{基本方法}
+    \par 对于二端口网络，既可以定义为端口1和端口2，也可以定义为输入端口和输出端口。对于前者，
+    两个端口都是用关联参考方向定义的；对于后者，输入端口按照关联参考方向定义，
+    输出端口按照源关联参考方向定义。其中的关系为
+    \begin{align*}
+        i_1=i_{in}\\
+        v_1=v_{in}\\
+        i_2=-i_{out}\\
+        v_2=v_{out}\\
+    \end{align*}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) to[short,i=$i_{in}$] (1,2) to[short,o-,i=$i_1$] (2,2);
+            \draw (2,0) to[short] (1,0) to[short,o-] (0,0);
+            \draw[->] (0,1.5) -- (0,0.5);
+            \draw[->] (1,1.5) -- (1,0.5);
+            \node[right=0.1cm] at (0,1) {$v_{in}$};
+            \node[right=0.1cm] at (1,1) {$v_{1}$};
+            \draw (2,2.5) rectangle (4,-0.5); 
+            \draw (5,2) to[short,i=$i_2$] (4,2);
+            \draw (4,0) to (5,0) to[short,o-] (6,0);
+            \draw (5,2) to[short,i=$i_{out}$,o-] (6,2);
+            \draw[->] (5,1.5) -- (5,0.5);
+            \draw[->] (6,1.5) -- (6,0.5);
+            \node[right=0.1cm] at (5,1) {$v_{2}$};
+            \node[right=0.1cm] at (6,1) {$v_{out}$};
+        \end{tikzpicture}
+    \end{center}
+    \par 为了描述这个网络，同样需要加上测试电流、测试电压进行测定，并且有$\mathrm{C}_{4}^{2}=6$种表述方式，对应
+    着二端口网络的6种参量。注意，测试电压的方向是由上到下(上高下低)，测试电流的方向是从下到上--但是二者的电流方向
+    都是相同的。
+
+    \subsection{六大参量}
+    \par (1)$\textbf{\textit{z}}$参量
+    \par 在端口1和端口2加上测试电流$i_{1}$与$i_{2}$，则根据叠加定理，有
+    \begin{align*}
+        v_1=z_{11}i_1+z_{12}i_2+v_{TH1}\\
+        v_2=z_{21}i_1+z_{22}i_2+v_{TH2}
+    \end{align*}
+    \par 写成矩阵形式，为
+    \[
+    \begin{pmatrix}
+        v_1\\v_2
+    \end{pmatrix}=
+    \begin{pmatrix}
+        z_{11} & z_{12} \\
+        z_{21} & z_{22} \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        i_{1} \\ i_{2}
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        v_{TH1} \\ v_{TH2}
+    \end{pmatrix}
+    \]
+    \[
+    \textbf{\textit{v}}=\textbf{\textit{zi}}+\textbf{\textit{v}}_{TH}   
+    \]
+    \[
+    \textbf{\textit{z}}=
+    \begin{pmatrix}
+        z_{11} & z_{12} \\
+        z_{21} & z_{22} \\
+    \end{pmatrix}
+    \]
+    \par $\textbf{\textit{z}}$称为这个二端口网络的\textbf{阻抗参量}(impedance parameters)，其中
+    四个元素都具备电阻量纲。将两个端口开路，测量开路电压就可以得到戴维南电压。而四个元素的求法为
+    \begin{align*}
+        z_{11}=\left.\frac{v_1}{i_1}\right|_{i_2=0,v_{TH1}=0} \qquad&
+        z_{12}=\left.\frac{v_1}{i_2}\right|_{i_1=0,v_{TH1}=0} \\
+        z_{21}=\left.\frac{v_2}{i_1}\right|_{i_2=0,v_{TH2}=0} \qquad&
+        z_{22}=\left.\frac{v_2}{i_2}\right|_{i_1=0,v_{TH2}=0} \\
+    \end{align*}
+    \par 由此可以得到下面的等效电路
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) to[short,o-,i=$i_1$] (1.5,2) to[cV=$z_{12}i_2$] (3,2) 
+                to[V=$v_{TH1}$] (4.5,2) to[R=$z_{11}$] (4.5,0) to[short,-o] (0,0);
+            \draw[-stealth] (0,1.5) to (0,0.5);
+            \node[right=0.1cm] at (0,1) {$v_{1}$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (4.5,2) to[short,o-,i=$i_2$] (3,2) to[cV_=$z_{21}i_1$] (1.5,2) 
+                to[V_=$v_{TH2}$] (0,2) to[R=$z_{22}$] (0,0) to[short,-o] (4.5,0);
+            \draw[-stealth] (4.5,1.5) to (4.5,0.5);
+            \node[right=0.1cm] at (4.5,1) {$v_{2}$};
+        \end{tikzpicture}
+    \end{center}
+    \par (2)$\textbf{\textit{y}}$参量
+    \par 在端口1和端口2加上测试电压$v_1$和$v_2$，则根据叠加定理，有
+    \begin{align*}
+        i_1=y_{11}v_1+y_{12}v_2+i_{N1}\\
+        i_2=y_{21}v_1+y_{22}v_2+i_{N2}
+    \end{align*}
+    \par 写成矩阵形式，为
+    \[
+    \begin{pmatrix}
+        i_1 \\ i_2
+    \end{pmatrix}=
+    \begin{pmatrix}
+        y_{11} & y_{12} \\
+        y_{21} & y_{22}
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_1 \\ v_2
+    \end{pmatrix}+
+    \begin{pmatrix}
+        i_{N1} \\ i_{N2}
+    \end{pmatrix}
+    \]
+    \[
+    \textbf{\textit{i}}=\textbf{\textit{yv}}+\textbf{\textit{i}}_{N}    
+    \]
+    \[
+    \textbf{\textit{y}}=
+    \begin{pmatrix}
+        y_{11} & y_{12} \\
+        y_{21} & y_{22}
+    \end{pmatrix}
+    \]
+    \par $\textbf{\textit{y}}$称为这个二端口网络的\textbf{导纳参量}(admittance parameters)，其中
+    四个元素都具备电导量纲。将两个端口短路，测量短路电流就可以得到诺顿电流。而四个元素的求法为
+    \begin{align*}
+        y_{11}=\left.\frac{i_1}{v_1}\right|_{v_2=0,i_{N1}=0} \qquad&
+        y_{12}=\left.\frac{i_1}{v_2}\right|_{v_1=0,i_{N1}=0} \\
+        y_{21}=\left.\frac{i_2}{v_1}\right|_{v_2=0,i_{N2}=0} \qquad&
+        y_{22}=\left.\frac{i_2}{v_2}\right|_{v_1=0,i_{N2}=0} \\
+    \end{align*}
+    \par 由此可以得到下面的等效电路
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) to[short,i=$i_1$] (1.5,2);
+            \draw (0,2) to[short,o-] (4.5,2) to[R] (4.5,0) to[short,-o] (0,0);
+            \draw (1.5,2) to[I,*-*] (1.5,0);
+            \draw (3,2) to[cI,*-*] (3,0);
+            \draw[-stealth] (0,1.5) to (0,0.5);  
+            \node[right=0.1cm] at (0,1) {$v_1$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (4.5,2) to[short,i=$i_2$] (3,2);
+            \draw (4.5,2) to[short,o-] (0,2) to[R] (0,0) to[short,-o] (4.5,0);
+            \draw (3,2) to[I,*-*] (3,0);
+            \draw (1.5,2) to[cI,*-*] (1.5,0);
+            \draw[-stealth] (4.5,1.5) to (4.5,0.5);
+            \node[right=0.1cm] at (4.5,1) {$v_2$};
+        \end{tikzpicture}
+    \end{center}
+    \par (3)$\textbf{\textit{h}}$参量
+    \par 在端口1和端口2加上$i_{1}$与$v_{2}$，则根据叠加定理，有
+    \begin{align*}
+        v_1&=h_{11}i_1+h_{12}v_2+v_{TH1}\\
+        i_2&=h_{21}i_1+h_{22}v_2+i_{N2}
+    \end{align*}
+    \par 写成矩阵形式，为
+    \[
+    \begin{pmatrix}
+        v_1\\i_2
+    \end{pmatrix}=
+    \begin{pmatrix}
+        h_{11} & h_{12} \\
+        h_{21} & h_{22} \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        i_{1} \\ v_{2}
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        v_{TH1} \\ i_{N2}
+    \end{pmatrix}
+    \]
+    \[
+    \textbf{\textit{h}}=
+    \begin{pmatrix}
+        h_{11} & h_{12} \\
+        h_{21} & h_{22} \\
+    \end{pmatrix}
+    \]
+    \par $\textbf{\textit{h}}$称为这个二端口网络的\textbf{混合参量}(hybrid parameters)，其中
+    $h_{11}$具备电阻量纲，$h_{22}$具备电导量纲，其余两个元素无量纲。
+    将端口1开路，端口2短路，就可以得到戴维南电压与诺顿电流。而四个元素的求法为
+    \begin{align*}
+        h_{11}&=\left.\frac{v_1}{i_1}\right|_{v_2=0,v_{TH1}=0} \qquad&
+        h_{12}&=\left.\frac{v_1}{v_2}\right|_{i_1=0,v_{TH1}=0} \\
+        h_{21}&=\left.\frac{i_2}{i_1}\right|_{v_2=0,i_{N2}=0} \qquad&
+        h_{22}&=\left.\frac{i_2}{v_2}\right|_{i_1=0,i_{N2}=0} \\
+    \end{align*}
+    \par 由此可以得到下面的等效电路
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) to[short,o-,i=$i_1$] (1.5,2) to[cV] (3,2) 
+                to[V=] (4.5,2) to[R] (4.5,0) to[short,-o] (0,0);
+            \draw[-stealth] (0,1.5) to (0,0.5);
+            \node[right=0.1cm] at (0,1) {$v_{1}$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (4.5,2) to[short,i=$i_2$] (3,2);
+            \draw (4.5,2) to[short,o-] (0,2) to[R] (0,0) to[short,-o] (4.5,0);
+            \draw (3,2) to[I,*-*] (3,0);
+            \draw (1.5,2) to[cI,*-*] (1.5,0);
+            \draw[-stealth] (4.5,1.5) to (4.5,0.5);
+            \node[right=0.1cm] at (4.5,1) {$v_2$};
+        \end{tikzpicture}
+    \end{center}
+    \par (4)$\textbf{\textit{g}}$参量
+    \par 在端口1和端口2加上$v_{1}$与$i_{2}$，则根据叠加定理，有
+    \begin{align*}
+        i_1&=g_{11}v_1+g_{12}i_2+i_{N1}\\
+        v_2&=g_{21}v_1+g_{22}i_2+v_{TH2}
+    \end{align*}
+    \par 写成矩阵形式，为
+    \[
+    \begin{pmatrix}
+        i_1\\v_2
+    \end{pmatrix}=
+    \begin{pmatrix}
+        g_{11} & g_{12} \\
+        g_{21} & g_{22} \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_{1} \\ i_{2}
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        i_{N1} \\ v_{TH2}
+    \end{pmatrix}
+    \]
+    \[
+    \textbf{\textit{g}}=
+    \begin{pmatrix}
+        g_{11} & g_{12} \\
+        g_{21} & g_{22} \\
+    \end{pmatrix}
+    \]
+    \par $\textbf{\textit{g}}$称为这个二端口网络的\textbf{逆混参量}(inverse hybrid parameters)，其中
+    $g_{11}$具备电导量纲，$g_{22}$具备电阻量纲，其余两个元素无量纲。
+    将端口1短路，端口2开路，就可以得到戴维南电压与诺顿电流。而四个元素的求法为
+    \begin{align*}
+        g_{11}&=\left.\frac{i_1}{v_1}\right|_{i_2=0,i_{N1}=0} \qquad&
+        g_{12}&=\left.\frac{i_1}{i_2}\right|_{v_1=0,i_{N1}=0} \\
+        g_{21}&=\left.\frac{v_2}{v_1}\right|_{i_2=0,v_{TH2}=0} \qquad&
+        g_{22}&=\left.\frac{v_2}{i_2}\right|_{v_1=0,v_{TH2}=0} \\
+    \end{align*}
+    \par 由此可以得到下面的等效电路
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) to[short,i=$i_1$] (1.5,2);
+            \draw (0,2) to[short,o-] (4.5,2) to[R] (4.5,0) to[short,-o] (0,0);
+            \draw (1.5,2) to[I,*-*] (1.5,0);
+            \draw (3,2) to[cI,*-*] (3,0);
+            \draw[-stealth] (0,1.5) to (0,0.5);  
+            \node[right=0.1cm] at (0,1) {$v_1$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (4.5,2) to[short,o-,i=$i_{1}$] (3,2) to[cV] (1.5,2) 
+                to[V] (0,2) to[R] (0,0) to[short,-o] (4.5,0);
+            \draw[-stealth] (4.5,1.5) to (4.5,0.5);
+            \node[right=0.1cm] at (4.5,1) {$v_{2}$};
+        \end{tikzpicture}
+    \end{center}
+    \par 以上四个参量中，$(1,1)$元和$(2,2)$元反映了阻抗(导纳)特性，而$(2,1)$元反映了端口1对端口2的作用，
+    被称为\textbf{增益}；而$(1,2)$元反映了端口2对端口1的作用，被称为\textbf{反馈}。上面是最为常用的四种参量。
+    \par (5)$\textbf{\textit{T}}$参量与$\textbf{\textit{t}}$参量
+    \par $\textbf{\textit{T}}$参量被称为\textbf{传输参量}(transmission parameters)或者ABCD参量，反映了输入端口对输出端口的作用。
+    我们先忽略网络内部的独立源，
+    在输入端口加恒压源或者恒流源激励，测量输出端口的开路电压或短路电流，其比值被称为\textbf{本征增益}。
+    \begin{align*}
+        \text{本征电压增益}\qquad & A_{v0}=\left.\frac{v_{out}}{v_{in}}\right|_{i_{out}=0}=\left.\frac{v_{2}}{v_{1}}
+        \right|_{i_2=0}=g_{21}\\
+        \text{本征跨导增益}\qquad & G_{m0}=\left.\frac{i_{out}}{v_{in}}\right|_{v_{out}=0}=\left.\frac{-i_{2}}{v_{1}}
+        \right|_{v_2=0}=-y_{21}\\
+        \text{本征跨阻增益}\qquad & R_{m0}=\left.\frac{v_{out}}{i_{in}}\right|_{i_{out}=0}=\left.\frac{v_{2}}{i_{1}}
+        \right|_{i_2=0}=z_{21}\\
+        \text{本征电流增益}\qquad & A_{i0}=\left.\frac{i_{out}}{i_{in}}\right|_{v_{out}=0}=\left.\frac{-i_{2}}{i_{1}}
+        \right|_{v_2=0}=-h_{21}\\
+    \end{align*}
+    \par 为了导出$\textbf{\textit{T}}$参量，我们用$(v_{out},i_{out})$表示$(v_{in},i_{in})$，我们有
+    \begin{align*}
+        v_{in}&=Av_{out}+Bi_{out}+v_{TH}\\
+        i_{in}&=Cv_{out}+Di_{out}+i_{N}
+    \end{align*}
+    \[
+    \begin{pmatrix}
+        v_{in} \\ i_{in}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        A & B \\ C & D
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_{out} \\ i_{out} \\
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        v_{TH} \\ i_{N}
+    \end{pmatrix}
+    \]
+    \[
+    \textbf{\textit{T}}=
+    \begin{pmatrix}
+        A & B \\
+        C & D 
+    \end{pmatrix} 
+    \]
+    \par 将独立源置零，由此可以解出
+    \begin{align*}
+        A&=\left.\frac{v_{in}}{v_{out}}\right|_{i_{out}=0}=\frac{1}{A_{v0}}\\
+        B&=\left.\frac{v_{in}}{i_{out}}\right|_{v_{out}=0}=\frac{1}{G_{m0}}\\
+        C&=\left.\frac{i_{in}}{v_{out}}\right|_{i_{out}=0}=\frac{1}{R_{m0}}\\
+        D&=\left.\frac{i_{in}}{i_{out}}\right|_{v_{out}=0}=\frac{1}{A_{i0}}\\
+    \end{align*}
+    因此
+    \[
+        \begin{pmatrix}
+            v_{in} \\ i_{in}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            \frac{1}{A_{v0}} & \frac{1}{G_{m0}} \\ \frac{1}{R_{m0}} & \frac{1}{A_{i0}}
+        \end{pmatrix}
+        \begin{pmatrix}
+            v_{out} \\ i_{out} \\
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            \frac{1}{g_{21}} & -\frac{1}{y_{21}} \\ \frac{1}{z_{21}} & -\frac{1}{g_{21}}
+        \end{pmatrix}
+        \begin{pmatrix}
+            v_{out} \\ i_{out} \\
+        \end{pmatrix}
+    \]
+    \par 而对于戴维南电压与诺顿电流，由于无法让一个端口同时既短路又开路，因而只能间接求出，例如
+    \[
+    v_{TH}=-Av_{out}|_{v_{in}=0,i_{out}=0}=-\frac{v_{in}|_{v_{in}=0,i_{out}=0}}{A_{v0}}
+    \]
+    \par 但是，用\textbf{\textit{T}}参量描述的网络无法用电路器件等效。此外，我们还有类似的\textbf{\textit{t}}参量(abcd参量)，
+    或者说\textbf{逆传参量}，但是很少使用。
+    \[
+    \begin{pmatrix}
+        v_2 \\ i_2
+    \end{pmatrix}    
+    =
+    \begin{pmatrix}
+        a & b \\ c & d \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_1 \\ -i_1
+    \end{pmatrix}
+    \]
+    \[
+    \textbf{\textit{t}}=
+    \begin{pmatrix}
+        a & b \\ c & d \\
+    \end{pmatrix}    
+    \]
+    \par (6)参量转化与网络连接
+    \par 以上是描述二端口网络的6种参量，当这些参量满足一定条件时，就可以相互转化，由一种参量求出另一种参量。可以
+    先根据参量定义列出两个表达式，由此导出相应电压电流的比值，从而获得参量。此外，这些参量有下面的关系：
+    \begin{align*}
+        \textbf{\textit{z}}\textbf{\textit{y}}=\textbf{\textit{I}}\\
+        \textbf{\textit{h}}\textbf{\textit{g}}=\textbf{\textit{I}}\\
+        \begin{pmatrix}
+            a & b \\ c & d \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            A & -B \\ -C & D \\
+        \end{pmatrix}
+        =\textbf{\textit{I}}\\
+    \end{align*}
+    \par 当两个网络连接成一个网络时，可以用这两个网络的参量导出新网络的参量。五种连接方式对应五种参量：串串连接
+    \textbf{\textit{z}}相加，并并连接\textbf{\textit{y}}相加，串并连接\textbf{\textit{h}}相加，串并连接
+    \textit{\textbf{g}}相加，级联\textbf{\textit{T}}相乘。
+    $$
+        \begin{pmatrix}
+            v_{in,1} \\ i_{in,1}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            A_1 & B_1 \\ C_1 & D_1
+        \end{pmatrix}
+        \begin{pmatrix}
+            v_{out,1} \\ i_{out,1}
+        \end{pmatrix}
+    $$
+    \[
+        \begin{pmatrix}
+            v_{in,2} \\ i_{in,2}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            A_2 & B_2 \\ C_2 & D_2
+        \end{pmatrix}
+        \begin{pmatrix}
+            v_{out,2} \\ i_{out,2}
+        \end{pmatrix}
+    \]
+    \[
+    \begin{pmatrix}
+        v_{out,1} \\ i_{out,1}
+    \end{pmatrix}=   
+    \begin{pmatrix}
+        v_{in,2} \\ i_{out,2}
+    \end{pmatrix}
+    \]
+    \[
+        \begin{pmatrix}
+            v_{in,1} \\ i_{in,1}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            A_1 & B_1 \\ C_1 & D_1
+        \end{pmatrix}
+        \begin{pmatrix}
+            A_2 & B_2 \\ C_2 & D_2
+        \end{pmatrix}
+        \begin{pmatrix}
+            v_{out,2} \\ i_{out,2}
+        \end{pmatrix}
+    \]
+    \par 我们可以得到
+    \begin{align*}
+        \text{串串}&\quad\textbf{\textit{z}}=\textbf{\textit{z}}_{1}+\textbf{\textit{z}}_{2}\\
+        \text{并并}&\quad\textbf{\textit{y}}=\textbf{\textit{y}}_{1}+\textbf{\textit{y}}_{2}\\
+        \text{串并}&\quad\textbf{\textit{h}}=\textbf{\textit{h}}_{1}+\textbf{\textit{h}}_{2}\\
+        \text{并并}&\quad\textbf{\textit{g}}=\textbf{\textit{g}}_{1}+\textbf{\textit{g}}_{2}\\
+        \text{级联}&\quad\textbf{\textit{T}}=\textbf{\textit{T}}_{1}\textbf{\textit{T}}_{2}\\
+    \end{align*}
+    \par (7)常见电阻网络的参量
+    \begin{center}
+    \begin{longtable}{|c|c|c|}
+        \hline
+        \bfseries 名称 & \bfseries 电路图示意 & \bfseries 相关参量 \\
+        \hline
+        - &
+        \begin{tikzpicture}
+            \draw (0,2) to[R=$R_1$,o-] (2,2) to[short,-o] (4,2);
+            \draw (0,0) to[short,o-o] (4,0);
+            \draw (2,2) to[R=$R_2$,*-*] (2,0);
+        \end{tikzpicture} &
+        \(
+        \textbf{\textit{z}}=
+        \begin{pmatrix}
+            R_1+R_2 & R_2 \\ R_2 & R_2 \\
+        \end{pmatrix}   
+        \)\\
+        \hline
+        T型衰减网络 &
+        \begin{tikzpicture}
+            \draw (0,2) to[R=$R_1$,o-] (2,2) to[R=$R_3$,-o] (4,2);
+            \draw (0,0) to[short,o-o] (4,0);
+            \draw (2,2) to[R=$R_3$,*-*] (2,0);
+        \end{tikzpicture} &
+        \(
+        \textbf{\textit{z}}=
+        \begin{pmatrix}
+            R_1+R_2 & R_2 \\ R_2 & R_2+R_3 \\
+        \end{pmatrix}    
+        \)\\
+        \hline
+        $\pi$型衰减网络 &
+        \begin{tikzpicture}
+            \draw (0,2) to[R=$G_2$,o-o] (4,2);
+            \draw (0,0) to[short,o-o] (4,0);
+            \draw (1,2) to[R=$G_1$,*-*] (1,0);
+            \draw (3,2) to[R=$G_3$,*-*] (3,0);
+        \end{tikzpicture} &
+        \(
+        \textbf{\textit{y}}=
+        \begin{pmatrix}
+            G_1+G_2 & -G_2 \\ -G_2 & G_2+G_3 \\
+        \end{pmatrix}    
+        \)\\
+        \hline
+        串臂阻抗 &
+        \begin{tikzpicture}
+            \draw (0,2) to[R=$Z$,o-o] (4,2);
+            \draw (0,0) to[short,o-o] (4,0);
+        \end{tikzpicture} &
+        \(
+        \textbf{\textit{T}}=
+        \begin{pmatrix}
+            1 & Z \\ 0 & 1 \\
+        \end{pmatrix}    
+        \) \\
+        \hline
+        并臂导纳 &
+        \begin{tikzpicture}
+            \draw (0,2) to[short,o-o] (4,2);
+            \draw (0,0) to[short,o-o] (4,0);
+            \draw (2,2) to[R=$Y$,*-*] (2,0);
+        \end{tikzpicture} &
+        \(
+        \textbf{\textit{T}}=
+        \begin{pmatrix}
+            1 & 0 \\ Y & 1 \\
+        \end{pmatrix}    
+        \)\\
+        \hline
+    \end{longtable}
+    \end{center}
+
+    \subsection{端口阻抗与特征阻抗}
+    \par 给二端口网络的输入端口加上戴维南源(或诺顿源)，输出端口对接负载电阻，那么，可以列写电路方程
+    来求解支路电压与电流。但是由于两个端口的互相作用，求解方程较为繁琐。
+    \begin{center}
+        \begin{tikzpicture}
+            \filldraw[fill=yellow] (2,2.5) rectangle (4,-0.5);
+            \draw (4,2) to[short] (6,2) to[R=$R_L$] (6,0) to[short] (4,0);
+            \draw (2,2) to[R=$R_S$] (0,2) to[V=$v_S$] (0,0) to[short] (2,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 我们可以将其拆分为两个独立的电路。根据戴维南-诺顿定理，将端口1左侧激励源去除，测得端口电阻称为\textbf{输入阻抗}，
+    这样端口2以及之后的部分就被等效为一个电阻；将端口2右侧电阻去除，开路电压就是等效的戴维南电压，去除恒压源后测得
+    端口电阻就是\textbf{输出阻抗}。同样，也可以得到输入导纳、输出导纳以及诺顿电流。
+    
+    \begin{center}
+        \begin{tikzpicture}
+            \filldraw[fill=yellow] (2,2.5) rectangle (4,-0.5);
+            \draw (4,2) to[short] (6,2) to[R=$R_L$] (6,0) to[short] (4,0);
+            \draw (2,2) to[short,-o] (0,2);
+            \draw (2,0) to[short,-o] (0,0);
+            \draw[-stealth] (0,1.5) to (0,0.5);
+            \node[right] at (0,1) {$Z_{in}/Y_{in}$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \filldraw[fill=yellow] (2,2.5) rectangle (4,-0.5);
+            \draw (4,2) to[short,-o] (6,2);
+            \draw (4,0) to[short,-o] (6,0);
+            \draw (2,2) to[short] (0,2) to[R=$R_S$] (0,0) to[short] (2,0);
+            \draw[-stealth] (6,1.5) to (6,0.5);
+            \node[right] at (6,1) {$Z_{out}/Y_{out}$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \filldraw[fill=yellow] (2,2.5) rectangle (4,-0.5);
+            \draw (4,2) to[short,-o] (6,2);
+            \draw (4,0) to[short,-o] (6,0);
+            \draw (2,2) to[R=$R_S$] (0,2) to[V=$v_S$] (0,0) to[short] (2,0);
+            \draw[-stealth] (6,1.5) to (6,0.5);
+            \node[right] at (6,1) {$v_{S,out}$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (3,2) to[R=$R_S$] (0,2) to[V=$v_S$] (0,0) to[short] (3,0) to[R=$Z_{in}$] (3,2);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (3,2) to[R=$Z_{out}$] (0,2) to[V=$v_{S,out}$] (0,0) to[short] (3,0) to[R=$R_L$] (3,2);
+        \end{tikzpicture}
+    \end{center}
+    \par 经计算可以得到如下结果
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \bfseries 参量 & \bfseries 输入 & \bfseries 输出 \\
+            \hline
+            \textbf{\textit{z}} &
+            \(
+            Z_{in}=z_{11}-\frac{z_{12}z_{21}}{z_{22}+R_L}    
+            \) &
+            \(
+            Z_{out}=z_{22}-\frac{z_{12}z_{21}}{z_{11}+R_S}    
+            \) \\
+            \hline
+            \textbf{\textit{y}} &
+            \(
+            Y_{in}=y_{11}-\frac{y_{12}y_{21}}{y_{22}+G_L}    
+            \) &
+            \(
+            Y_{out}=y_{22}-\frac{y_{12}y_{21}}{y_{11}+G_S}    
+            \) \\
+            \hline
+            \textbf{\textit{h}} &
+            \(
+            Z_{in}=h_{11}-\frac{h_{12}h_{21}}{h_{22}+G_L}    
+            \) &
+            \(
+            Y_{out}=h_{22}-\frac{h_{12}h_{21}}{h_{11}+R_S}    
+            \) \\
+            \hline
+            \textbf{\textit{g}} &
+            \(
+            Y_{in}=g_{11}-\frac{g_{12}g_{21}}{g_{22}+R_L}    
+            \) &
+            \(
+            Z_{out}=g_{22}-\frac{g_{12}g_{21}}{g_{11}+G_S}    
+            \) \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \par 当两个二端口网络采取级联方式连接时，有时需要一个端口的功率完全传到另一个端口，这就要求满足匹配条件，
+    两个端口的\textbf{特征阻抗}需要相等。特征阻抗不同于输入阻抗和输出阻抗，因为输入阻抗和输出阻抗与外界环境有关，
+    特征阻抗仅与网络自身有关。
+    \par 特征阻抗的计算方法是：对于$n$端口网络，设定其$n$个端口的特征阻抗为$Z_{01},Z_{02},\cdots,Z_{0n}$，对于
+    第$i$个端口，让其余$i-1$各端口连接阻值与本端口特征阻抗相同的电阻，此时测得$i$端口的输入阻抗就是$Z_{0i}$。这样
+    得到$i$个方程，将其联立，就可以得到各端口的特征阻抗。以二端口网络为例，两个端口的特征阻抗为
+    \begin{align*}
+        Z_{01}=\sqrt{\frac{z_{11}}{y_{11}}}=\sqrt{\frac{A}{D}}\sqrt{\frac{B}{C}}\\
+        Z_{02}=\sqrt{\frac{z_{22}}{y_{22}}}=\sqrt{\frac{D}{A}}\sqrt{\frac{B}{C}}
+    \end{align*}
+    \par 一般计算时，常用
+    \begin{align*}
+        Z_{01}=\sqrt{Z_{1,2short}Z_{1,2open}}=\sqrt{Z_1|_{R_L=0}Z_1|_{R_L=\infty}}\\
+        Z_{02}=\sqrt{Z_{2,1short}Z_{2,1open}}=\sqrt{Z_2|_{R_S=0}Z_2|_{R_S=\infty}}
+    \end{align*}
+    \par 因此，计算一个端口的特征阻抗时，可以将另一个端口短路，求得第一个输入阻抗；然后将另一个端口开路，
+    求得第二个输入阻抗，两个阻抗的几何平均值就是这个端口的特征阻抗。
+    \subsection{传递函数}
+    \par (1)电压传递函数
+    \par 将电压信号从输入端输入，输出端则会产生一个输出信号，这个输入与输出的比值(增益)就是\textbf{电压传递函数}。如果
+    输入端接一个戴维南源，则传递函数定义为
+    \[
+    H=\frac{v_L}{v_S}    
+    \]
+    \par 我们可以解出
+    \begin{align*}
+        &H=\frac{z_{21}R_L}{(z_{11}+R_S)(y_{22}+R_L)-z_{12}z_{21}}\\
+        &H=\frac{y_{21}G_S}{y_{12}y_{21}-(y_{11}+G_S)(y_{22}+G_L)}\\
+        &H=\frac{h_{21}}{h_{12}h_{21}-(h_{11}+R_S)(h_{22}+G_L)}\\
+        &H=\frac{g_{21}G_SR_L}{(g_{11}+G_S)(g_{22}+R_L)-g_{12}g_{21}}
+    \end{align*}
+    \par 特别地，如果$(1,2)$元为0，也就是说没有反馈作用，只有端口1对端口2的单向作用，此时传递函数将十分简单、易算，
+    可以分解为三步：从电源到输入端口、从输入端口到受控源、从受控源到输出端口。
+    \begin{align*}
+        &H=\frac{z_{21}R_L}{(z_{11}+R_S)(y_{22}+R_L)}=\frac{1}{z_{11}+R_S}z_{21}\frac{R_L}{z_{22}+R_L}\\
+        &H=-\frac{y_{21}G_S}{(y_{11}+G_S)(y_{22}+G_L)}=\frac{G_S}{y_{11}+G_S}y_{21}\left(-\frac{1}{y_{22}+G_L}\right)\\
+        &H=-\frac{h_{21}}{(h_{11}+R_S)(h_{22}+G_L)}=\frac{1}{h_{11}+R_S}h_{21}\left(-\frac{1}{h_{22}+G_L}\right)\\
+        &H=\frac{g_{21}G_SR_L}{(g_{11}+G_S)(g_{22}+R_L)}=\frac{G_S}{g_{11}+G_S}g_{21}\frac{R_L}{g_{22}+R_{L}}
+    \end{align*}
+    \par 即使$(1,2)$元不为0，若满足下面的\textbf{单向化条件}，依然可以视为单向网络
+    \begin{align*}
+        &|z_{12}z_{21}|\ll|(z_{11}+R_S)(z_{22}+R_L)|\\
+        &|y_{12}y_{21}|\ll|(y_{11}+G_S)(y_{22}+G_L)|\\
+        &|h_{12}h_{21}|\ll|(h_{11}+R_S)(h_{22}+G_L)|\\
+        &|g_{12}g_{21}|\ll|(g_{11}+G_S)(g_{22}+R_L)|
+    \end{align*}
+    \par (2)功率传递函数
+    \par 除了电压幅度的变化，有时也需要研究功率大小的变化，其比值称为\textbf{电压增益}，定义为负载电阻实际功率
+    与信源额定功率之比(为了区分，这里$H$表示功率传递函数，用$H_v$表示电压传递函数)
+    \[
+    G_{T}=\frac{P_L}{P_{S,max}}=\frac{4R_S}{R_L}\left(\frac{v_{L}}{v_{S}}\right)^2=\frac{4R_S}{R_L}H_v^2    
+    \]
+    \par 当然，有时需要用到电压均方值。我们将电压增益的平方根值定义为\textbf{功率传递函数}$H$
+    \[
+        G_T=|H|^2
+    \]
+    \[
+    H=2\sqrt{\frac{R_S}{R_L}}\frac{v_L}{v_S}    
+    \]
+    \par 使用ABCD参量，可以得到
+    \[
+    H=2\left(A\sqrt{\frac{R_L}{R_S}}+B\sqrt{\frac{1}{R_SR_L}}+C\sqrt{R_SR_L}+D\sqrt{\frac{R_S}{R_L}}\right)^{-1}    
+    \]
+    \par 由基本不等式可以得到，当$R_S=Z_{01}$，$R_L=Z_{02}$时，功率传递函数与功率增益最大，这实际上就是最大功率匹配条件，
+    且这个最大功率增益为
+    \[
+    G_{T,max}=\frac{1}{|\sqrt{AD}+\sqrt{BC}|^2}    
+    \]
+    \par 无论是电压传函还是功率传函，经过多个网络后，其总传函可以通过各个分传函相乘而得到
+    \[
+    H=\prod_{k=1}^{n}H_{k}    
+    \]
+
+    \subsection{\textbf{\textit{s}}参量}
+    \par 假设二端口网络两端接有电阻$R_1$和$R_2$。首先在端口1再接上一恒压源$v_S$，那么其有一额定功率$P_{S,max}$。这一功率从电源发出、
+    经过端口1、经过端口2，最后到达负载电阻，经过端口1、端口2的过程中可能会有功率损失，但我们重点研究负载电阻实际接收的功率，以及
+    最终反射到电源的功率。此时我们定义
+    \begin{align*}
+        &|s_{11}|^2=\frac{P_{1}}{P_{S,max}}\\
+        &|s_{21}|^2=\frac{P_2}{P_{S,max}}
+    \end{align*}
+    可以得到，在线性电阻电路中
+    \begin{align*}
+        &s_{11}=\Gamma=\frac{Z_{1}-R_1}{Z_1+R_1}\\
+        &s_{21}=H=2\sqrt{\frac{R_1}{R_2}}\frac{v_2}{v_S}
+    \end{align*}
+    \par 同样，将电源接到端口2，可以得到
+    \begin{align*}
+        &s_{12}=2\sqrt{\frac{R_2}{R_1}}\frac{v_1}{v_S}\\
+        &s_{22}=\frac{Z_2-R_2}{Z_2+R_2}
+    \end{align*}
+    \par 由此，就可以得到\textbf{\textit{s}}参量，也就是\textbf{散射参量}(scattering parameters)
+    \[
+    \textbf{\textit{s}}=
+    \begin{pmatrix}
+        s_{11} & s_{12} \\ s_{21} & s_{22}
+    \end{pmatrix}    
+    \]
+
+    \section{线性电阻电路的综合应用}
+    \subsection{网络分类}
+    \par (1)互易网络与非互易网络
+    \par 激励和相应可以互换位置的网络就是互易网络，否则是非互易网络。互易网络的参量满足
+    \begin{align*}
+        &z_{12}=z_{21}\qquad y_{12}=y_{21}\\
+        &h_{12}=-h_{21}\qquad g_{12}=-g_{21}\\
+        &\Delta_{T}=1\\
+        &s_{12}=s_{21}
+    \end{align*}
+    \par (2)对称网络与非对称网络
+    \par 当二端口网络对两个端口看入其端口电压电流关系毫无
+    差别时，则是对称网络。如果从两个端口看存在可区分
+    的差别，则为非对称网络。电对称网络未必物理对称，但物理对称的一定是电对称网络。
+    线性二端口网络如果对称，则一定互易，而互易则未必对称。对称网络满足
+    \begin{align*}
+        &z_{11}=z_{22}\qquad z_{12}=z_{21}\\
+        &y_{11}=y_{22}\qquad y_{12}=y_{21}\\
+        &\Delta_{h}=1\qquad h_{12}=-h_{21}\\
+        &A=D\qquad \Delta_{T}=1
+    \end{align*}
+    \par (3)有源网络与无源网络
+    \par 阻性网络的有无源定义较为简单。其功率
+    \[
+    p=\sum_{k}p_k=\sum_{k}v_k i_k=\textbf{\textit{v}}^T\textbf{\textit{i}}    
+    \]
+    \[
+    \textbf{\textit{f}}(\textbf{\textit{v}},\textbf{\textit{i}})=0    
+    \]
+    \par 如果$\forall\textbf{\textit{v}},\textbf{\textit{i}}$，都有$p=\textbf{{\textit{v}}}^T
+    \textbf{\textit{i}}\geqslant 0$，则网络是无源的；如果$\exists\textbf{\textit{v}}_0,\textbf{\textit{i}}_0$，
+    使得$p=\textbf{{\textit{v}}}_0^T\textbf{\textit{i}}_0< 0$，则网络是有源的。。
+    \par (4)无损网络和有损网络
+    \par 无损和有损是相对无源阻性网络而言的。无源网络不释放能量，如果其也不吸收能量，即$\textbf{{\textit{v}}}^T
+    \textbf{\textit{i}}=0$，则网络是无损的；如果$\textbf{{\textit{v}}}^T\textbf{\textit{i}}>0$，
+    则网络是有损的。
+    \par 无损网络的四大参量是对角元全部为0的反对称矩阵，散射参量满足
+    \[
+        |s_{11}|^2+|s_{21}|^2=1
+    \]
+    \par (5)双向网络与单向网络
+    \par 两个端口互相作用的网络就是双向网络，而只有一方对另一方作用的则是单向网络。双向网络满足
+    \begin{align*}
+        &z_{12}z_{21}\neq 0\\
+        &y_{12}y_{21}\neq 0\\
+        &h_{12}h_{21}\neq 0\\
+        &g_{12}g_{21}\neq 0\\
+        &\Delta_{T}\neq 0
+    \end{align*}
+    \par 单向网络满足
+    \begin{align*}
+        &z_{12}=0\qquad z_{21}\neq 0\\
+        &y_{12}=0\qquad y_{21}\neq 0\\
+        &h_{12}=0\qquad h_{21}\neq 0\\
+        &g_{12}=0\qquad g_{21}\neq 0\\
+        &\Delta_{T}=0\\
+        &s_{12}=0\qquad s_{21}\neq 0
+    \end{align*}
+    \subsection{无源无损网络的应用}
+    \par (1)理想变压器
+    \par 理想变压器的表示如下图
+    \begin{center}
+        \begin{tikzpicture}[american inductors]
+            \draw (0,3) node[transformer](T) {};
+            \draw (T.A1) to[short,-o] ++(-1,0);
+            \draw (T.A2) to[short,-o] ++(-1,0);
+            \draw (T.B1) to[short,-o] ++(1,0);
+            \draw (T.B2) to[short,-o] ++(1,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 假设两端匝数比为$n:1$，则称其\textbf{变压比}为$n$，一般用\textbf{\textit{T}}参量描述：
+    \[
+    \begin{pmatrix}
+        v_{in} \\ i_{in}
+    \end{pmatrix}=
+    \begin{pmatrix}
+        n & 0 \\ 0 & \frac{1}{n}
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_{out} \\ i_{out}
+    \end{pmatrix}   
+    \]
+    \par 如果扭转输出端的线圈，则此参量矩阵取相反数，同时在符号中打点表示方向。理想变压器是互易网络、双向网络，
+    无法用\textbf{\textit{z}}和\textbf{\textit{y}}参量表达，而其\textbf{\textit{h}}和\textbf{\textit{g}}参量为
+    \begin{align*}
+        \textbf{\textit{h}}=
+        \begin{pmatrix}
+            0 & n \\ -n & 0
+        \end{pmatrix} \\
+        \textbf{\textit{g}}=
+        \begin{pmatrix}
+            0 & \frac{1}{n} \\ -\frac{1}{n} & 0
+        \end{pmatrix}
+    \end{align*}
+    \par 理想变压器可以实现源和阻的变换，利用戴维南定理，可以得到
+    \[
+    Z_{in}=n^2R_L    
+    \]
+    \[
+    Z_{out}=\frac{R_S}{n^2}    
+    \]
+    \[
+    v_{S,out}=\frac{v_S}{n}    
+    \]
+    \par 理想变压器可以实现单双端转换，也就是balance-unbalance(balun)的\textbf{巴伦变换}。对于一个端口，
+    如果一端是接地的，则是单端，如果两端都不接地，则是悬浮，如果两端电势是相反数，则是双端。可以通过输入端线圈接地、
+    输出端线圈正中央接地，恒压源中部接地等方式实现转换。
+    \par 我们也有理想三端口变压器，三个端口的匝数为$N_1$,$N_2$,$N_3$，可以用下面的参量描述
+    \[
+    \begin{pmatrix}
+        v_1 \\ v_2 \\ i_3
+    \end{pmatrix}  
+    =
+    \begin{pmatrix}
+        0 & 0 & \frac{N_1}{N_3}\\
+        0 & 0 & \frac{N_2}{N_3}\\
+        -\frac{N_1}{N_3} & -\frac{N_2}{N_3} & 0
+    \end{pmatrix}  
+    \begin{pmatrix}
+        i_1 \\ i_2 \\ v_3
+    \end{pmatrix}
+    \]
+    \par (2)理想回旋器
+    \par 理想回旋器的符号如下所示
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,3) node[gyrator](T) {};
+            \draw (T.A1) to[short,-o] ++(-1,0);
+            \draw (T.A2) to[short,-o] ++(-1,0);
+            \draw (T.B1) to[short,-o] ++(1,0);
+            \draw (T.B2) to[short,-o] ++(1,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 其传输参量为
+    \[
+    \begin{pmatrix}
+        v_{in} \\ i_{in}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & r \\ \frac{1}{r} & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_{out} \\ i_{out}
+    \end{pmatrix}   
+    \]
+    \par 利用理想回旋器，可以实现从一端到另一端的对偶变换。
+    \par (3)理想环行器
+    \par 理想环行器是多端口的器件，以三端口为例，其三个端口均按照关联参考方向定义，符号如下
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (-3,1) to[short,o-o] (3,1);
+            \draw (-3,-1) to[short,o-o] (3,-1);
+            \draw (-1,-1) to[short,-o] (-1,-3);
+            \draw (1,-1) to[short,-o] (1,-3);
+            \filldraw[fill=yellow] (0,0) circle (1.6);
+            \draw[-stealth] (0,1) arc (90:-135:1);
+        \end{tikzpicture}
+    \end{center}
+    \par 按照指针方向定义端口1,2,3，其参量矩阵为
+    \[
+    \begin{pmatrix}
+        v_1 \\ v_2 \\ v_3
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & R & -R \\
+        -R & 0 & R \\
+        R & -R & 0 
+    \end{pmatrix}
+    \begin{pmatrix}
+        i_1 \\ i_2 \\ i_3
+    \end{pmatrix}    
+    \]
+    \par 三个端口的特征阻抗相同，满足
+    \[
+    Z_{01}=Z_{02}=Z_{03}=R    
+    \]
+    \par 而其\textbf{\textit{s}}参量更有助于我们了解其环行特性
+    \[
+    \textbf{\textit{s}}
+    =
+    \begin{pmatrix}
+        0 & 0 & -1\\
+        -1 & 0 & 0\\
+        0 & -1 & 0
+    \end{pmatrix}    
+    \]
+    \par 由此可以得到理想环行器的特征，假设端口1接戴维南源：
+    \par (1)若端口1匹配，则端口1的功率全部被端口1吸收，没有反射，因此$s_{11}=0$。
+    \par (2)端口1吸收这些功率后，全部送到端口2处，同时信号反相，因而$s_{21}=0$。
+    \par (3)若端口2匹配，则功率全部送到端口2的负载电阻，没有反射，端口3无法接收功率。
+    \par 理想环行器可以实现收发分离：在一个端口接电源，一个端口接天线，一个端口接接收机，可以实现信号收发分离。此外，
+    在端口接负阻，可以实现负阻放大器特性。
+
+

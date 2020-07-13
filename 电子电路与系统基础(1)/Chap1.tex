@@ -1,0 +1,676 @@
+
+    \chapter{电路基础}
+
+    \section{基本物理量}
+
+    \subsection{电流}
+    \par 带电粒子的运动形成\textbf{电流}(current)，记为$i$。单位时间内通过
+    一横截面的电量就是此时刻的电流值
+    \[
+    i=\frac{\Delta q}{\Delta t}    
+    \]
+    \par 电流的实际方向与正载流子运动方向相同，负载流子运动方向相反。在求解电路时，不知道电流的实际方向，可以设定一个\textbf{参考方向}。例如，
+    假设电流从$A$流向$B$，则此参考方向电流值为$i_{AB}$。如果电流的实际方向与参考方向相同，
+    则$i_{AB}>0$；若电流的实际方向与参考方向相反，则$i_{AB}<0$。
+    \par 方向、大小恒定的电流称为\textbf{直流电流}(DC Current)，方向变化、均值为0的电流
+    称为\textbf{交流电流}(AC Current)。
+    \subsection{电压与电动势}
+    \par 带电粒子稳定运动需要电场，有电场就有\textbf{电压}(voltage)，记为$v$。而维持电场，
+    需要电动势(EMF)，记为$\varepsilon$。电场对单位电荷做的功就是此地的电压
+    \[
+    v=\frac{W}{q}    
+    \]
+    \par 参考地(GND)的电位为0，某点对GND的电压就是这一点的电位，即
+    \[
+    v_A=v_{AG}    
+    \]
+    \par 规定电压的方向与电场方向相同，从高电位指向低电位。设定电压的参考方向$AB$，如果
+    $v_a>v_B$，则电压为正；否则电压为负。
+    \par 电动势的定义与电压类似，搬运单位电荷做的功就是电动势的大小
+    \[
+    \varepsilon=\frac{\Delta E}{\Delta q}    
+    \]
+    \par 在闭合电路中，电动势是其他能量转换为电能的桥梁，电压是电能转化为其他能量的桥梁。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[battery] (0,4)
+            -- (3,4) to[R] (3,0) -- (0,0);
+            \draw[-stealth] (-0.5,3) -- (-0.5,1);
+            \draw[-stealth] (3.5,3) -- (3.5,1);
+            \draw[-stealth] (0.5,1.5) -- (0.5,2.5);
+            \node at (-0.8,2) {$v$};
+            \node at (0.8,2) {$\varepsilon$};
+            \node at (3.8,2) {$v$};
+        \end{tikzpicture}
+    \end{center}
+    \subsection{功率}
+    \par 对于一个元件，设定好其电压与电流的参考方向，则其功率
+    \[
+    p(t)=i(t)v(t)    
+    \]
+    \par 特别地，在电阻中，我们可以得到
+    \[
+    p=\frac{v^2}{R}=i^2R    
+    \]
+    \par 如果是交变电压或交变电流，则平均功率的计算中，电压和电流应该取均方根值
+    \[
+    \bar{p}=\frac{v_{rms}^2}{R}=i_{rms}^2R    
+    \]
+    \par 如果元件按照\textbf{关联参考方向}定义，则$p>0$时元件吸收能量，$p<0$时元件释放能量。
+    如果元件按照\textbf{源关联参考方向}定义，则$p>0$时释放能量，$p<0$时吸收能量。
+
+    \section{电路系统与网络}
+    \subsection{端口定义与网络描述}
+    \par 在由元件与导线连接而成的网络中引出两条导线，称为两个\textbf{端点}(terminal)。如果两个端点一个流出电流，
+    一个流入电流，且二者时刻相等，则两个端点满足\textbf{端口条件}，构成一个\textbf{端口}(port)。一个电路网络可以引出
+    多个端口，不同端口可以共有端点。
+    \par 对于大部分元件，常用\textbf{关联参考方向}定义；对于电源，常用\textbf{源关联参考方向}定义。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,3) to[short,i=$i$,o-] (2,3);
+            \draw (2,0) to[short,i=$i$,-o] (0,0);
+            \draw (2,4) rectangle (4,-1);
+            \draw[-stealth] (0,2.5) -- (0,0.5);
+            \node at (-0.3,1.5) {$v$};
+            \node[below=0.3cm] at (2,-1) {关联参考方向};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (2,3) to[short,i=$i$,-o] (0,3);
+            \draw (0,0) to[short,i=$i$,o-] (2,0);
+            \draw (2,4) rectangle (4,-1);
+            \draw[-stealth] (0,2.5) -- (0,0.5);
+            \node at (-0.3,1.5) {$v$};
+            \node[below=0.3cm] at (2,-1) {源关联参考方向};
+        \end{tikzpicture}
+    \end{center}
+    \par 现有一个$n$端口网络，每个端口都有相应的电压和电流$(v_j,i_j)$，共有$2n$个物理量，其中
+    只有$n$个是独立的。因此可以用$n$个物理量描述另外$n$个物理量，需要$n$个方程。这些方程称为元件约束条件
+    或者\textbf{广义欧姆定律}(GOL)。
+    \begin{align*}
+        f_1(v_1,v_2,\cdots,v_n;i_1,i_2,\cdots,i_n)=0\\
+        f_2(v_1,v_2,\cdots,v_n;i_1,i_2,\cdots,i_n)=0\\
+        \cdots\\
+        f_n(v_1,v_2,\cdots,v_n;i_1,i_2,\cdots,i_n)=0\\
+    \end{align*}
+    \par 我们记$\textbf{\textit{v}}=(v_1,v_2,\cdots,v_n)^{T}$，$\textbf{\textit{i}}=(i_1,i_2,\cdots,i_n)^{T}$，
+    $\textbf{\textit{f}}=(f_1,f_2,\cdots,f_n)^{T}$，则上述方程可以表示为
+    \[
+    \textbf{\textit{f}}(\textbf{\textit{v}},\textbf{\textit{i}})=\textbf{0}    
+    \]
+    \par 如果从中解出$\textbf{\textit{i}}=\textbf{\textit{f}}_{iv}(\textbf{\textit{v}})$，则称此网络为
+    \textbf{压控网络}(元件)；如果解出$\textbf{\textit{v}}=\textbf{\textit{f}}_{vi}(\textbf{\textit{i}})$，则
+    称此网络为\textbf{流控网络}(元件)。也有可能解出由一部分电流电压解出另一部分电流电压的混合控制网络，
+    或者无法解出这样的表示关系。
+    \subsection{网络连接}
+    \par 对于单端口网络，其连接方式有\textbf{串联}与\textbf{并联}两种，此外可以得到特殊的连接方式——\textbf{对接}。
+    \par (1)串联，满足$i=i_1=i_2$，$v=v_1+v_2$。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) rectangle (3,1);
+            \draw (4,2) rectangle (7,1);
+            \draw (0.5,-1) to[short,o-] (0.5,0) to[short,o-,i=$i_1$] (0.5,1);
+            \draw (2.5,1) to[short,-o] (2.5,0) to[short] (4.5,0);
+            \draw (4.5,0) to[short,-o,i=$i_2$] (4.5,1);
+            \draw (6.5,1) to[short,-o] (6.5,0) to[short,-o] (6.5,-1);
+            \node at (1.5,1.5) {$N_1$};
+            \node at (5.5,1.5) {$N_2$};
+            \draw[-stealth] (1,0) -- (2,0);
+            \draw[-stealth] (5,0) -- (6,0);
+            \node[below=0.3cm] at (1.5,0) {$v_1$};
+            \node[below=0.3cm] at (5.5,0) {$v_2$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,4) to[short,o-,i=$i$] (2,4)
+                to[R] (2,2) to[R] (2,0) to[short,-o,i=$i$] (0,0);
+            \draw[-stealth] (0,3) -- (0,1); 
+            \node[left=0.3cm] at (0,2) {$v$};
+        \end{tikzpicture}
+    \end{center}
+    \par (2)并联，满足$i=i_1+i_2$，$v=v_1=v_2$。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,2) rectangle (3,1);
+            \draw (4,2) rectangle (7,1);
+            \draw (0.5,-1) to[short,o-] (0.5,0) to[short,o-,i=$i_1$] (0.5,1);
+            \draw (2.5,1) to[short,-o] (2.5,0);
+            \draw (4.5,0.5) to[short,-o,i=$i_2$] (4.5,1);
+            \draw (6.5,1) to[short,-o] (6.5,0) to[short,-o] (6.5,-1);
+            \draw (0.5,0.5) to[short,*-] (4.5,0.5);
+            \draw (2.5,0) -- (2.5,-0.5) to[short,-*] (6.5,-0.5);
+            \node at (1.5,1.5) {$N_1$};
+            \node at (5.5,1.5) {$N_2$};
+            \draw[-stealth] (1,0) -- (2,0);
+            \draw[-stealth] (5,0) -- (6,0);
+            \node[below=0.1cm] at (1.5,0) {$v_1$};
+            \node[below=0.1cm] at (5.5,0) {$v_2$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,3) to[short,o-,i=$i$] (1.5,3)
+                to[R] (1.5,0) to[short,-o,i=$i$] (0,0);
+            \draw (1.5,3) to[short,*-] (3,3)
+                to[R] (3,0) to[short,-*] (1.5,0);
+            \draw[-stealth] (0,2.5) -- (0,0.5);
+            \node[left=0.15cm] at (0,1.5) {$v$};
+        \end{tikzpicture}
+    \end{center}
+    \par (3)对接。如图定义的两个元件对接，满足$v_1=v_2$，$i_1=-i_2$。如果是
+    源关联参考方向与关联参考方向的元件对接，则$i_1=i_2$，例如电源与电阻连接，就可以用图解法解决问题。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) rectangle (1,3);
+            \draw (4,0) rectangle (5,3);
+            \draw (1,2.5) to[short,-o,i=$i_1$] (2.5,2.5);
+            \draw (4,2.5) to[short,i^=$i_2$] (2.5,2.5);
+            \draw (2.5,0.5) to[short,o-] (1,0.5);
+            \draw (2.5,0.5) to[short] (4,0.5);
+            \draw[-stealth] (2,2) -- (2,1);
+            \draw[-stealth] (3,2) -- (3,1);
+            \node[left=0.1cm] at (2,1.5) {$v_1$};
+            \node[right=0.1cm] at (3,1.5) {$v_2$};
+            \node at (0.5,1.5) {$N_1$};
+            \node at (4.5,1.5) {$N_2$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,0) to[V] (0,3)-- (2,3) to[R] (2,0) -- (0,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 对接可以视为两个元件串联后端口短路，也可以视为两个元件并联后端口开路。两种情形下
+    电压与电流满足的关系不相同。
+    \par 对于二端口网络，则有串串连接、并并连接、串并连接、并串连接四种方式。而级联是一种常用的
+    特殊连接方式。设网络$N_1$的电压电流有$(v_1^{(1)},i_1^(1))$，$(v_2^{(1)},i_2^{(1)})$；
+    网络$N_2$的电压电流有$(v_1^{(2)},i_1^{(2)})$，$(v_2^{(2)},i_2^{(2)})$。最后总端口为$(v_1,i_1)$
+    和$(v_2,i_2)$。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (1.5,0) rectangle (2.5,3);
+            \node at (2,1.5) {$N_2$};
+            \draw (1.5,4) rectangle (2.5,7);
+            \node at (2,5.5) {$N_1$};
+            \draw (0,6.5) to[short,o-] (1.5,6.5);
+            \draw (1.5,4.5) -- (1,4.5) -- (1,2.5) -- (1.5,2.5);
+            \draw (1.5,0.5) to[short,-o] (0,0.5);
+            \draw (4,6.5) to[short,o-] (2.5,6.5);
+            \draw (2.5,4.5) -- (3,4.5) -- (3,2.5) -- (2.5,2.5);
+            \draw (2.5,0.5) to[short,-o] (4,0.5);
+            \node at (2,-0.6) {$i_1=i_1^{(1)}=i_2^{(2)}$\quad$i_2=i_2^{(1)}=i_2^{(2)}$};
+            \node at (2,-1.2) {$v_1=v_1^{(1)}+v_1^{(2)}$\quad$v_2=v_2^{(1)}+v_2^{(2)}$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (1.5,0) rectangle (2.5,3);
+            \node at (2,1.5) {$N_2$};
+            \draw (1.5,4) rectangle (2.5,7);
+            \node at (2,5.5) {$N_1$};
+            \draw (0,6.5) to[short,o-] (1.5,6.5);
+            \draw (1,6.5) to[short,*-] (1,2.5) -- (1.5,2.5);
+            \draw (1.5,0.5) to[short,-o] (0,0.5);
+            \draw (0.5,0.5) to[short,*-] (0.5,4.5) -- (1.5,4.5);
+            \draw (4,6.5) to[short,o-] (2.5,6.5);
+            \draw (3,6.5) to[short,*-] (3,2.5) -- (2.5,2.5);
+            \draw (2.5,0.5) to[short,-o] (4,0.5);
+            \draw (3.5,0.5) to[short,*-] (3.5,4.5) -- (2.5,4.5);
+            \node at (2,-0.6) {$i_1=i_1^{(1)}+i_2^{(2)}$\quad$i_2=i_2^{(1)}+i_2^{(2)}$};
+            \node at (2,-1.2) {$v_1=v_1^{(1)}=v_1^{(2)}$\quad$v_2=v_2^{(1)}=v_2^{(2)}$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (1.5,0) rectangle (2.5,3);
+            \node at (2,1.5) {$N_2$};
+            \draw (1.5,4) rectangle (2.5,7);
+            \node at (2,5.5) {$N_1$};
+            \draw (0,6.5) to[short,o-] (1.5,6.5);
+            \draw (1.5,4.5) -- (1,4.5) -- (1,2.5) -- (1.5,2.5);
+            \draw (1.5,0.5) to[short,-o] (0,0.5);
+            \draw (4,6.5) to[short,o-] (2.5,6.5);
+            \draw (3,6.5) to[short,*-] (3,2.5) -- (2.5,2.5);
+            \draw (2.5,0.5) to[short,-o] (4,0.5);
+            \draw (3.5,0.5) to[short,*-] (3.5,4.5) -- (2.5,4.5);
+            \node at (2,-0.6) {$i_1=i_1^{(1)}=i_2^{(2)}$\quad$i_2=i_2^{(1)}+i_2^{(2)}$};
+            \node at (2,-1.2) {$v_1=v_1^{(1)}+v_1^{(2)}$\quad$v_2=v_2^{(1)}=v_2^{(2)}$};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (1.5,0) rectangle (2.5,3);
+            \node at (2,1.5) {$N_2$};
+            \draw (1.5,4) rectangle (2.5,7);
+            \node at (2,5.5) {$N_1$};
+            \draw (0,6.5) to[short,o-] (1.5,6.5);
+            \draw (1,6.5) to[short,*-] (1,2.5) -- (1.5,2.5);
+            \draw (1.5,0.5) to[short,-o] (0,0.5);
+            \draw (0.5,0.5) to[short,*-] (0.5,4.5) -- (1.5,4.5);
+            \draw (4,6.5) to[short,o-] (2.5,6.5);
+            \draw (2.5,4.5) -- (3,4.5) -- (3,2.5) -- (2.5,2.5);
+            \draw (2.5,0.5) to[short,-o] (4,0.5);
+            \node at (2,-0.6) {$i_1=i_1^{(1)}+i_2^{(2)}$\quad$i_2=i_2^{(1)}=i_2^{(2)}$};
+            \node at (2,-1.2) {$v_1=v_1^{(1)}=v_1^{(2)}$\quad$v_2=v_2^{(1)}+v_2^{(2)}$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (1,0) rectangle (2,3);
+            \draw (3,0) rectangle (4,3);
+            \draw (0,2.5) to[short,o-] (1,2.5);
+            \draw (0,0.5) to[short,o-] (1,0.5);
+            \draw (5,2.5) to[short,o-] (4,2.5);
+            \draw (5,0.5) to[short,o-] (4,0.5);
+            \draw (2,0.5) -- (3,0.5);
+            \draw (2,2.5) -- (3,2.5);
+            \node at (1.5,1.5) {$N_1$};
+            \node at (3.5,1.5) {$N_2$};
+            \node at (2.5,-0.5) {级联电路网络};
+        \end{tikzpicture}
+    \end{center}
+    \subsection{电路系统}
+    \par 对于一个电路系统，给其一个输入$e(t)$，就可以得到输出$r(t)$，
+    $r(t)=f(e(t))$。设$r_1=f(e_1)$，$r_2=f(e_2)$。下面的系统满足\textbf{叠加性}。
+    \[
+    f(e_1+e_2)=r_1+r_2=f(e_1)+f(e_2)
+    \]
+    \par 下面的系统满足\textbf{均匀性}。
+    \[
+    f(\alpha e)=\alpha r=\alpha f(e)    
+    \]
+    \par 同时具备叠加性和均匀性的系统称为\textbf{线性系统}。
+    \[
+    f(\alpha e_1+\beta e_2)=\alpha r_1+\beta r_2=\alpha f(e_1)+\beta f(e_2)    
+    \]
+
+    \section{基本元件}
+    \subsection{理想电源、电阻、电容与电感}
+    \par 对于理想电源，这里以恒压源与恒流源为例。恒压源两端的电压是固定的，而其电流在允许的范围内
+    任意取值，实际取值受外界环境约束。恒流源的电流是恒定的，两端的电压不定。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[V=$V_{S0}$] (4,0);
+            \draw (7,0) to[I=$I_{S0}$] (11,0);
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[-stealth] (-2,0) to (2,0) node[right] {$v$};
+            \draw[-stealth] (0,-2) to (0,2) node[above] {$i$};
+            \node[above right] at (0,0) {$O$};
+            \draw[red] (1,-1.5) -- (1,1.5);
+            \node[below right] at (1,0) {$V_{S0}$};
+            \draw[-stealth] (5,0) to (9,0) node [right] {$v$};
+            \draw[-stealth] (7,-2) to (7,2) node [above] {$i$};
+            \node[above right] at (7,0) {$O$};
+            \draw[blue] (5.5,1) -- (8.5,1);
+            \node[above right] at (7,1) {$I_{S0}$};
+        \end{tikzpicture}
+    \end{center}
+    \par 如果$V_{S0}$，$I_{S0}$是随时间成正弦函数变化的，就可以得到理想正弦交流电电压源。
+    \par 不受控制的电源是独立源，此外还有受到其他电压或电流控制的\textbf{受控源}。受控电压源、电流源的符号如图所示
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (3,3) to[short,o-] (0,3) to[cV] (0,0) to[short,-o] (3,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (3,3) to[short,o-] (0,3) to[cI] (0,0) to[short,-o] (3,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 下面是四种常用的受控源。
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        \bfseries 类别 & \bfseries 简称 & \bfseries 参量 & \bfseries 表达式 \\
+            \hline
+            压控压源 & VCVS & 电压控制系数$A_v$ & $v_o=A_v v_i$ \\
+            \hline
+            压控流源 & VCCS & 跨导控制系数$G_m$ & $i_o=G_m v_i$ \\
+            \hline
+            流控压源 & CCVS & 跨阻控制系数$R_m$ & $v_o=R_m i_i$ \\
+            \hline
+            流控流源 & CCCS & 电流控制系数$A_i$ & $i_o=A_i i_i$ \\
+            \hline
+        \end{tabular}
+    \end{center}
+    
+    \par 伏安特性过原点的曲线都可以称为电阻，而更常用的是线性电阻。线性电阻满足
+    欧姆定律
+    \[
+    v=Ri    
+    \]
+    \[
+    i=Gv    
+    \]
+    其中$R$称为\textbf{电阻}，$G$称为\textbf{电导}，二者互为倒数。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[-stealth] (-2,0) to (2,0) node[right] {$v$};
+            \draw[-stealth] (0,-2) to (0,2) node[above] {$i$};
+            \node[below right] at (0,0) {$O$};
+            \draw[green] (-1,-1.5) to (1,1.5);
+            \node[right] at (1,1) {$i=\frac{v}{R}=Gv$};
+            \draw (5,0) to[R=$R$] (9,0); 
+        \end{tikzpicture}
+    \end{center}
+    \par 而电容和电感需要用微分方程描述，理想电容与电感的GOL方程为
+    \[
+    i(t)=C\frac{\mathrm{d}v(t)}{\mathrm{d}t}    
+    \]
+    \[
+    v(t)=L\frac{\mathrm{d}i(t)}{\mathrm{d}t}    
+    \]
+    \begin{center}
+        \begin{tikzpicture}[american inductors]
+            \draw (0,0) to[C=$C$] (4,0);
+            \draw (7,0) to[L=$L$] (11,0);
+        \end{tikzpicture}
+    \end{center}
+    \subsection{更多电源}
+    \par 电源按照用途，可以分为power supply(电源)和signal sourse(信号源、信源)。
+    交流发电机、化学电池、太阳能电池等都可以用作电源。
+    一般的电源，其伏安特性曲线在$v$轴、$i$轴有两个正截距。
+    一般的处理方法为化曲为直，通过割线或切线将其线性化，从而得到含有线性内阻的电源。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[-stealth] (-1,0) -- (3,0) node [right] {$v$};
+            \draw[-stealth] (0,-1) -- (0,3) node [above] {$i$};
+            \node[above right] at (0,0) {$O$};
+            \draw[red] (-0.5,2.5) -- (2.5,-0.5);
+            \node[above right] at (2,0) {$V_{S0}$};
+            \node[above right] at (0,2) {$I_{S0}$};
+        \end{tikzpicture}
+    \end{center}
+    \par 此时，电源的伏安特性可以被表述为
+    \[
+    \frac{v}{V_{S0}}+\frac{i}{I_{S0}}=1    
+    \]
+    \par 如果对上面的等式变形，就可以得到含线性电阻电源的两种等效方式。
+    \par (1)戴维南(Thevenin)电压源，这是一个流控元件，满足
+    \[
+    v=V_{S0}-\frac{V_{S0}}{I_{S0}}i    
+    \]
+    \[
+    R_S=\frac{V_{S0}}{I_{S0}}    
+    \]
+    其中$R_S$称为电源的\textbf{内阻}。
+    \par (2)诺顿(Norton)电流源，这是一个压控元件，满足
+    \[
+    i=I_{S0}-\frac{I_{S0}}{V_{S0}}v    
+    \]
+    \[
+    G_S=\frac{I_{S0}}{V_{S0}}    
+    \]
+    \par 两种形式相互等效，其等效电路图如图所示，二者可以相互转化。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (3,3) to[R=$R_S$,o-] (0,3) to[V=$V_{S0}$] (0,0) to[short,-o] (3,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (3,3) to[short,o-] (1.5,3) to[R=$G_S$] (1.5,0) to[short,-o] (3,0);
+            \draw (1.5,3) to[short,*-] (0,3) to[I=$I_{S0}$] (0,0) to[short,-*] (1.5,0);
+        \end{tikzpicture}
+    \end{center}
+    \[
+    V_{S0}=R_SI_{S0}    
+    \]
+    \[
+    I_{S0}=G_SV_{S0}    
+    \]
+    \[
+    G_{S0}R_{S0}=1    
+    \]
+    \par 可以求出，线性内阻电源对外释放的功率有最大值，称为\textbf{电源的额定功率}
+    \[
+    p=vi\leqslant\frac{V_{S(,rms)}^2}{4R_S}=\frac{I_{S(,rms)}^2}{4G_S}=P_{S,max}   
+    \]
+    \par 当且仅当负载电阻等于电源内阻时，负载电阻会全部吸收这些能量。这就是\textbf{(最大功率传输)匹配条件}
+    \[
+    R_L=R_S    
+    \]
+    \par 在射频情况下，电源直接输出其最大功率，经过一段时间到达负载，负载如果不匹配，只能吸收其中的部分能量，
+    而将无法吸收的能量发生回去，我们定义\textbf{反射系数}
+    \[
+    \Gamma=\frac{R_L-R_S}{R_L+R_S}    
+    \]
+    \par 则吸收的功率与反射的功率为
+    \[
+    P_{reflect}=\Gamma^2 P_{S,max}   
+    \]
+    \[
+    P_L=(1-\Gamma^2)P_{S,max}    
+    \]
+    \subsection{更多电阻}
+    \par 伏安特性曲线经过原点的元件都可以抽象为电阻元件，包括非线性电阻，以及开路、短路等。
+    \par 两个端点若没有导线或元件连接，就形成了\textbf{开路}(open)，两端点之间电流为0，电压不定。
+    两个端点直接用导线相连，就形成了\textbf{短路}(short)，两端点之间电流为0，电流不定。开路相当于无穷大电阻，
+    或者零电导；短路相当于无穷大电导，或者零电阻。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[-stealth] (-2,0) -- (2,0) node [right] {$v$};
+            \draw[-stealth] (0,-2) -- (0,2) node [above] {$i$};
+            \node[above right] at (0,0) {$O$};
+            \draw[red,line width=3pt] (-1.5,0) -- (1.5,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw[-stealth] (-2,0) -- (2,0) node [right] {$v$};
+            \draw[-stealth] (0,-2) -- (0,2) node [above] {$i$};
+            \node[above right] at (0,0) {$O$};
+            \draw[blue,line width=3pt] (0,-1.5) -- (0,1.5);
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-o] (1.5,0);
+            \draw (2.5,0) to[short,o-o] (4,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-o] (1.5,0) to[short,o-o] (2.5,0) to[short,o-o] (4,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 在电子电路中，很少使用手动开关，常使用\textbf{受控开关}。当控制电压$v_C$满足一定条件时，开关闭合，
+    相当于短路；满足另一条件时，开关断开，相当于开路。
+    \par 二极管、晶体管于后文介绍，这里简单介绍隧道二极管(tunnel diode)与肖克利二极管(shockley diode)，其
+    伏安特性曲线分别为N型和S型。其中的负阻区由于反馈调节机制，实际的工作点不会存在与这个区域。
+    \par 进一步推广电阻概念，将电能转化为其他形式能量的器件都可以抽象为电阻元件，例如电灯、电机、电热器、发射天线等。
+    其等效电阻值为
+    \[
+    R=\frac{V^2}{P}    
+    \]
+
+    \section{电路方程}
+    \subsection{基尔霍夫定律}
+    \par 基尔霍夫定律包括KCL方程和KVL方程，其中KCL方程来自电荷守恒定律，KVL方程来自能量守恒定律。
+    \par (1)KCL方程是指，流入同一节点的电流之和为0；或者流出同一节点的电流之和为0；或者流入节点的电流之和等于流出节点的
+    电流之和。这里的“流入”“流出”，指的是电流的\textbf{参考方向}。
+    \[
+    \sum_{k=1}^{n}i_k=0    
+    \]
+    \par (2)KVL方程是指，在电路中绕任意回路一周，电压之和为0。具体而言，沿着回路，按照设定的电压参考方向(忽略实际方向)，
+    下降取正值，上升取负值，则电压降之和为0。
+    \[
+    \sum_{k=1}^{n}v_k=0    
+    \]
+    \subsection{电路方程的基本列写方法}
+    \par 对于一个含有$b$条支路，$n$个节点的电路，要求其$b$条支路的电流和电压，就有$2b$个未知量，需要$2b$个方程。
+    对于$b$条支路，需要$b$个GOL方程。对于$n$个节点，可以列写$n$个KCL方程，但是其中只有$n-1$个是独立的，那么
+    再挑选$b-(n-1)=b-n+1$个独立回路，列写KVL方程。这样，我们用$2b$个方程求解出$2b$个未知量，这就是
+    \textbf{支路电流电压法}，又称为“2b法”。
+    $$\text{2b个方程}\begin{cases}
+        b \text{个GOL方程}\\
+        n-1 \text{个KCL方程}\\
+        b-n+1 \text{个KVL方程}
+    \end{cases}$$
+    \subsection{简化电路方程列写}
+    \par 为了降低方程的规模，可以采用下面三种方法。
+    \par (1)支路电流法：列写$n-1$个节点的KCL方程，对于剩下$b-n+1$个KVL方程，将GOL方程代入其中。这样，最终只需要
+        $b$个方程。
+    \par (2)回路电流法：选定网孔(回路)，设定其中的回路电流，这样KCL方程实际上就蕴含其中，只需要列写KCL方程即可。
+    这样，最终只需要$b-n+1$个方程。方程可以通过矩阵来体现
+    \[
+    \begin{pmatrix}
+        R_{11} & \cdots & R_{1n} \\
+        \vdots & & \vdots \\
+        R_{n1} & \cdots & R_{nn} \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        i_{1}\\
+        \vdots\\
+        i_{n}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \pm v_{S}\\
+        \vdots\\
+        0\\
+    \end{pmatrix}
+    \]
+    其中矩阵$(R_{lk})_{n\times n}$是一个对称方阵，对角线上的元素$R_{kk}$称为环路电流$i_k$的\textbf{自阻}，
+    将该回路上所有电阻相加即可；其余元素$R_{lk}$称为电流$i_l$与电流$i_k$的\textbf{互阻}，将两个环路电流共同经过
+    的电阻按照下列规则相加：如果经过该电阻的两个电流同向，则取正号；如果经过该电阻的两个电阻反向，则取负号。
+    如果回路中有电源，需要写在等号右侧，否则取0。
+    求得环路电流后，就可以进一步求得支路电流与电压。
+    \par (3)节点电压法：设定各个节点的电压，这样KVL方程就蕴含在其中，只需列写$n-1$个KCL方程即可，最终
+    只需要$n-1$个方程。方程也可以写成矩阵的形式
+    \[
+    \begin{pmatrix}
+        G_{11} & \cdots & G_{1n} \\
+        \vdots & & \vdots \\
+        G_{n1} & \cdots & G_{nn} \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        v_{1}\\
+        \vdots\\
+        v_{n}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \pm G_Sv_S\\
+        \vdots\\
+        0\\
+    \end{pmatrix}
+    \]
+    其中矩阵$(G_{lk})_{n\times n}$是一个对称方阵，对角线上的元素$G_{kk}$称为结点电压$v_k$的\textbf{自导}，
+    将与该节点相连的电导相加即可；其余元素$G_{lk}$称为电压$v_l$与电压$v_k$的\textbf{互导}，等于两个节点之间电导和的相反数。
+    如果回路中有电源，需要写在等号右侧，否则取0。
+    求得节点电压后，就可以进一步求得支路电流与电压。
+
+    \section{等效电路}
+    \subsection{等效电路的原则}
+    \par 对于两个网络，在一定的条件和范围内，如果二者的伏安特性完全相同，则认为两个电路网络是等效的。对于复杂网络，可以用
+    简单的等效网络替代，从而降低电路的复杂性。对一个电路网络进行等效，既可以用电路语言来描述，也可以用数学语言来描述。
+    \subsection{常用电路定理}
+    \par (1)\textbf{替代定理}：假设两个网络$A$与$B$对接，二者除了对接外内部无任何联系，而网络$A$的端口电压电流为$(V_p,I_p)$，则网络$B$可以用电压
+    为$V_p$的恒压源或者电流为$I_p$的恒流源替代。更进一步，网络$B$实际上可以用任意伏安特性曲线经过$(V_p,I_p)$一点的元件替代，
+    但是要特别注意多解情况。
+    \par (2)\textbf{叠加定理}：对于线性时不变电阻电路，其中含有$m$个独立恒流源与$n$个独立恒压源，则电路中任一支路的电流
+    或者电压必然可以表示为电源电压与电流的线性组合，且组合系数仅与网络自身有关，而与电源无关。
+    \[
+    ?=\sum_{l=1}^{m}P_lI_{Sl}+\sum_{k=1}^{n}Q_kV_{Sk}    
+    \]
+    \par (3)\textbf{对偶定理}：对于一个电路，可以按照对偶原则设计对偶电路：其对偶电路的拓扑图为原电路拓扑的对偶图，支路元件替换为对偶元件。
+    原电路有相应的电路方程，那么将方程的所有物理量换为对偶量，就是其对偶电路的电路方程。
+    
+    \subsection{基本等效电路例}
+    \par (1)电阻串联和并联：串联用符号$+$表示，并联用符号$||$表示。串联电阻相加，并联电导相加，也就是
+    \[
+    R_{eq}=\sum_{k=1}^{n}R_k\quad\text{(串联)}
+    \]
+    \[
+    G_{eq}=\sum_{k=1}^{n}G_k\quad\frac{1}{R_{eq}}=\sum_{k=1}^{n}\frac{1}{R_k}\quad\text{(并联)}
+    \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,2) to[R] (2,2) to[R] (4,2) to[R] (6,2) to[short,-o] (6,0);
+            \draw (12,2) to[short,o-] (7,2) to[R] (7,0) to[short,-o] (12,0);
+            \draw (9,2) to[R,*-*] (9,0);
+            \draw (11,2) to[R,*-*] (11,0);
+        \end{tikzpicture}
+    \end{center}
+    \par 在串联电阻中，我们有
+    \[
+    i=\frac{v}{\Sigma R}    
+    \]
+    \par 在并联电阻中，我们有
+    \[
+    v=\frac{i}{\Sigma G}    
+    \]
+    \par (2)理想电源串联和并联：两个恒压源串联，可以等效为一个恒压源，电压等于两个电源电压之和；两个恒流源并联，
+    可以等效为一个恒流源，电流等于两个电源电流之和。两个电压相同的恒压源可以并联，但不同电压的恒压源不能并联；两个
+    电流相同的恒流源可以串联，但不同的恒流源不能串联，实际上很少并联恒压源或串联恒流源。一个恒压源与一个恒流源并联，
+    可以忽略恒流源的作用，将其开路；一个恒压源与一个恒流源串联，可以忽略恒压源的作用，将其短路。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,2) to[V] (2,2) to[V] (4,2) to[short,-o] (4,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (4,2) to[short,o-] (0,2) to[I] (0,0) to[short,-o] (4,0);
+            \draw (2,2) to[I,*-*] (2,0);
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (4,2) to[short,o-] (0,2) to[V] (0,0) to[short,-o] (4,0);
+            \draw (2,2) to[V,*-*] (2,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,2) to[I] (2,2) to[I] (4,2) to[short,-o] (4,0);
+        \end{tikzpicture}    
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (4,2) to[short,o-] (0,2) to[V] (0,0) to[short,-o] (4,0);
+            \draw (2,2) to[I,*-*] (2,0);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,2) to[V] (2,2) to[I] (4,2) to[short,-o] (4,0);
+        \end{tikzpicture}
+    \end{center}
+    \par (3)戴维南电压源与诺顿电流源的串并联
+    \par 两个戴维南电压源串联，得到一个新的戴维南源，其电压等于两个电压源电压之和，内阻等于两个电压源内阻之和。两个
+    诺顿电流源并联，得到一个新的诺顿源，其电流等于两个电流源电流之和，内导等于两个电流源内导之和。
+    \par 两个戴维南电压源并联，可以起到按照一定比例合成电压源信号的作用；两个诺顿电流源并联，可以起到按照一定比例
+    合成电流源信号的作用。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,3) to[V=$v_{S1}$] (2,3) to[R=$R_{S1}$] (4,3) to[short,-o] (4,0);
+            \draw (0,1) to[V=$v_{S2}$,*-] (2,1) to[R=$R_{S2}$,-*] (4,1);
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,3) to[I=$i_{S1}$] (2,3) to[short] (2,1);
+            \draw (0,1) to[R=$G_{S1}$,*-] (2,1);
+            \draw (3,1) to[short] (3,3) to[I=$i_{S2}$] (5,3) to[short,-o] (5,0);
+            \draw (3,1) to[R=$G_{S2}$,-*] (5,1); 
+            \draw (2,2) to[short,*-*] (3,2);
+        \end{tikzpicture}
+    \end{center}
+    \begin{align*}
+        &v_{S}=\frac{R_{S2}}{R_{S1}+R_{S2}}v_{S1}+\frac{R_{S1}}{R_{S1}+R_{S2}}v_{S2}\\
+        &i_{S}=\frac{G_{S2}}{G_{S1}+G_{S2}}i_{S1}+\frac{G_{S1}}{G_{S1}+G_{S2}}i_{S2}
+    \end{align*}
+    \par (4)电桥
+    \par 下图所示电路结构被称为\textbf{电桥}，其中$A$、$B$两点间可以开路、短路、连接其他器件。
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) to[short,o-] (0,4) to[R=$R_1$] (3,4) to[R=$R_2$] (6,4) to[short,-o] (6,0);
+            \draw (0,2) to[R=$R_3$,*-] (3,2) to[R=$R_4$,-*] (6,2);
+            \draw (3,4) to[short,*-o] (3,3.5) node[right] {$A$};
+            \draw (3,2) to[short,*-o] (3,2.5) node[right] {$B$};
+        \end{tikzpicture}
+    \end{center}
+    \par 如果四个电阻满足
+    \[
+    \frac{R_1}{R_2}=\frac{R_3}{R_4}    
+    \]
+    也就是$R_1R_4=R_2R_3$，称为\textbf{电桥平衡条件}，那么无论$AB$之间处于什么状态，都满足
+    \begin{align*}
+        i_{AB}&=0\\
+        v_{AB}&=0
+    \end{align*}
+
+
